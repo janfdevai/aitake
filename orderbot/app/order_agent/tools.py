@@ -1,0 +1,290 @@
+import os
+import httpx
+from typing import Optional, Dict, Any, List
+
+from langchain.messages import ToolMessage
+from langchain.tools import ToolRuntime, tool
+from langgraph.types import Command
+
+# Assume DB API is running on localhost:8000. 
+# In a real setup, this should be configurable via env vars.
+DB_API_URL = os.getenv("DB_API_URL", "http://localhost:8000")
+
+@tool
+def get_user_phone_number(runtime: ToolRuntime) -> str:
+    """Get the user's phone number."""
+    return runtime.state.get("user", {}).get("phone_number", "unknown")
+
+
+@tool
+def get_user_name(runtime: ToolRuntime) -> str:
+    """Get the name of the user"""
+    return runtime.state.get("user", {}).get("name", "unknown")
+
+
+@tool
+def update_user_name(user_name: str, runtime: ToolRuntime) -> Command:
+    """Update the name of the user in the state once they've revealed it."""
+    return Command(
+        update={
+            "user": {"name": user_name},
+            "messages": [
+                ToolMessage(
+                    "Successfully updated user name",
+                    tool_call_id=runtime.tool_call_id,
+                )
+            ],
+        }
+    )
+
+def _get_business_id(phone_number: str) -> Optional[str]:
+    """Helper to resolve business UUID from phone number."""
+    try:
+        # Use simple synchronous call or async? Tools can be async but here we are using def.
+        # LangChain tools can be async, but standard def runs in threadpool.
+        # We'll use httpx.get (sync) for simplicity in this synchronous tool definition.
+        
+        # Note: If running inside an async loop, sync httpx might block the loop if not careful.
+        # But for now, we'll assume it's fine or refactor to async def if needed.
+        # Given FastAPI runs these, async def is better for the agent.
+        # However, the current tools are 'def'. Let's stick to sync for compatibility or switch to async def.
+        # The previous tools were sync (using `with Session(engine) as session`).
+        # So sync httpx is comparable.
+        
+        response = httpx.get(f"{DB_API_URL}/businesses/by-phone/{phone_number}")
+        response.raise_for_status()
+        data = response.json()
+        return data.get("business_id")
+    except Exception as e:
+        print(f"Error fetching business ID: {e}")
+        return None
+
+def _get_menu_items(business_id: str) -> List[Dict[str, Any]]:
+    try:
+        response = httpx.get(f"{DB_API_URL}/businesses/{business_id}/menu")
+        response.raise_for_status()
+        return response.json()
+    except Exception as e:
+        print(f"Error fetching menu: {e}")
+        return []
+
+@tool
+def get_menu(runtime: ToolRuntime) -> str:
+    """Get the menu for the business the user is interacting with."""
+    business_phone = runtime.state.get("user", {}).get("business_phone_number")
+    if not business_phone:
+        return "Error: Business phone number not found in state."
+
+    business_id = _get_business_id(business_phone)
+    if not business_id:
+        return "Error: Could not find business associated with this phone number."
+
+    items = _get_menu_items(business_id)
+    if not items:
+        return "The menu is currently empty."
+
+    menu_str = "Welcome to our menu!\n\n"
+    # Grouping by category is removed as models don't support it yet.
+    # Just listing items.
+    
+    for item in items:
+        price = float(item.get("price", 0))
+        name = item.get("name")
+        desc = item.get("description")
+        
+        menu_str += f"- {name}: ${price:.2f}"
+        if desc:
+            menu_str += f" ({desc})"
+        menu_str += "\n"
+
+    return menu_str
+
+
+@tool
+def add_order_item(
+    product_name: str, quantity: int, runtime: ToolRuntime
+) -> Command | str:
+    """Add an item to the user's current order (cart)."""
+    business_phone = runtime.state.get("user", {}).get("business_phone_number")
+    if not business_phone:
+        return "Error: Business phone number not found in state."
+
+    business_id = _get_business_id(business_phone)
+    if not business_id:
+        return "Error: Could not find business."
+
+    items = _get_menu_items(business_id)
+    
+    # Find item by name (case-insensitive)
+    target_item = None
+    for item in items:
+        if item.get("name", "").lower() == product_name.lower():
+            target_item = item
+            break
+    
+    if not target_item:
+        # Try partial match
+        matches = [i for i in items if product_name.lower() in i.get("name", "").lower()]
+        if len(matches) == 1:
+            target_item = matches[0]
+        elif len(matches) > 1:
+            names = ", ".join([m.get("name") for m in matches])
+            return f"Multiple items found matching '{product_name}'. Please be more specific: {names}"
+        else:
+            return f"Item '{product_name}' not found on the menu."
+
+    # Update state
+    current_items = runtime.state.get("user", {}).get("items", [])
+    
+    # Check if item already in cart
+    updated_items = []
+    item_in_cart = False
+    
+    for cart_item in current_items:
+        if cart_item.get("item_id") == target_item.get("item_id"):
+            new_qty = cart_item["quantity"] + quantity
+            if new_qty > 0:
+                cart_item["quantity"] = new_qty
+                updated_items.append(cart_item)
+            item_in_cart = True
+        else:
+            updated_items.append(cart_item)
+    
+    if not item_in_cart and quantity > 0:
+        updated_items.append({
+            "item_id": target_item.get("item_id"),
+            "quantity": quantity,
+            "name": target_item.get("name"),
+            "price": float(target_item.get("price", 0))
+        })
+
+    return Command(
+        update={
+            "user": {"items": updated_items},
+            "messages": [
+                ToolMessage(
+                    f"Added {quantity}x {target_item.get('name')} to your cart.",
+                    tool_call_id=runtime.tool_call_id,
+                )
+            ]
+        }
+    )
+
+
+@tool
+def add_order(delivery_type: str, address: Optional[str], runtime: ToolRuntime) -> Command | str:
+    """
+    Place the order.
+    Args:
+        delivery_type: 'pickup' or 'delivery'.
+        address: Delivery address (required if delivery_type is 'delivery').
+    """
+    user_state = runtime.state.get("user", {})
+    business_phone = user_state.get("business_phone_number")
+    client_phone = user_state.get("phone_number")
+    client_name = user_state.get("name", "Unknown")
+    cart_items = user_state.get("items", [])
+
+    if not business_phone or not client_phone:
+        return "Error: Missing business or client information."
+
+    if not cart_items:
+        return "Your cart is empty. Please add items before placing an order."
+
+    if delivery_type.lower() == "delivery" and not address:
+        return "Error: Delivery address is required for delivery orders."
+
+    # 1. Get Business ID
+    business_id = _get_business_id(business_phone)
+    if not business_id:
+        return "Error: Could not resolve business ID."
+
+    try:
+        # 2. Get or Create Client
+        client_id = None
+        
+        # Try to find client
+        try:
+            resp = httpx.get(f"{DB_API_URL}/businesses/{business_id}/clients/wa/{client_phone}")
+            if resp.status_code == 200:
+                client_id = resp.json().get("client_id")
+        except:
+            pass
+            
+        # If not found, create
+        if not client_id:
+            try:
+                new_client = {
+                    "wa_id": client_phone,
+                    "full_name": client_name,
+                    "phone_number": client_phone
+                }
+                create_resp = httpx.post(f"{DB_API_URL}/businesses/{business_id}/clients", json=new_client)
+                create_resp.raise_for_status()
+                client_id = create_resp.json().get("client_id")
+            except Exception as e:
+                return f"Error creating client record: {e}"
+
+        # 3. Create Order
+        items_data = [{"item_id": i["item_id"], "quantity": i["quantity"]} for i in cart_items]
+        
+        order_payload = {
+            "client_id": client_id,
+            "delivery_type": delivery_type.lower(),
+            "delivery_address": address if delivery_type.lower() == "delivery" else None,
+            "items": items_data
+        }
+        
+        order_resp = httpx.post(f"{DB_API_URL}/businesses/{business_id}/orders", json=order_payload)
+        order_resp.raise_for_status()
+        order_data = order_resp.json()
+        
+        total = order_data.get("total_amount", 0)
+        order_uuid = order_data.get("order_id")
+
+        return Command(
+            update={
+                "user": {"items": []}, # Clear cart
+                "messages": [
+                    ToolMessage(
+                        f"Order placed successfully! Order ID: {order_uuid}\nTotal: ${total}\nStatus: {order_data.get('status')}",
+                        tool_call_id=runtime.tool_call_id,
+                    )
+                ]
+            }
+        )
+
+    except Exception as e:
+        return f"Error placing order: {e}"
+
+
+@tool
+def get_order_summary(runtime: ToolRuntime) -> str:
+    """Get the summary of the current order (cart)."""
+    items = runtime.state.get("user", {}).get("items", [])
+    if not items:
+        return "Your cart is currently empty."
+
+    summary = "Here is your current order summary:\n\n"
+    total = 0.0
+
+    for item in items:
+        price = item.get("price", 0.0)
+        qty = item.get("quantity", 0)
+        cost = price * qty
+        total += cost
+        summary += f"- {item.get('name')} (x{qty}): ${cost:.2f}\n"
+
+    summary += f"\nTotal: ${total:.2f}"
+    return summary
+
+
+tools = [
+    get_user_phone_number,
+    get_user_name,
+    update_user_name,
+    get_menu,
+    add_order_item,
+    add_order,
+    get_order_summary,
+]

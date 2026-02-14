@@ -1,0 +1,15 @@
+[project]
+name = "orderbot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "agentevals>=0.0.9",
+    "fastapi[standard]>=0.128.0",
+    "httpx>=0.28.1",
+    "langchain>=1.2.8",
+    "langchain-google-genai>=4.2.0",
+    "langgraph>=1.0.7",
+    "python-dotenv>=1.2.1",
+]
