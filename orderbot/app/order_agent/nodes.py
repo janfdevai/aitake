@@ -32,7 +32,6 @@ def llm_call(state: MessagesState):
                                     - When the customer finishes ordering, summarize the order using `get_order_summary`.
                                     - Ask one final time if they want to add anything else.
                                     - Register the order using `add_order`.
-                                    - Collect payment details last.
                                     - If the order is pickup:
                                     - Inform the customer that the pickup time is approximately **1–1:30 hours**.
                                     - Finish the conversation with a friendly closing such as: “See you soon.”

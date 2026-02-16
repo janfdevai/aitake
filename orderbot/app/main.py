@@ -29,7 +29,7 @@ async def chat(request: MessageRequest):
         }
         if request.user.name is not None:
             user_state["name"] = request.user.name
-        if request.user.items is not None:
+        if request.user.items:
             user_state["items"] = request.user.items
 
         input_state = {
