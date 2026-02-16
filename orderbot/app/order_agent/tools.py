@@ -93,6 +93,9 @@ def add_order_item(
 ) -> Command | str:
     """Add an item to the user's current order (cart)."""
     business_phone = runtime.state.get("user", {}).get("business_phone_number")
+    # We do NOT read current items from state to calculate the new list.
+    # We only look up the product and return a delta.
+
     if not business_phone:
         return "Error: Business phone number not found in state."
 
@@ -119,35 +122,20 @@ def add_order_item(
             return f"Multiple items found matching '{product_name}'. Please be more specific: {names}"
         else:
             return f"Item '{product_name}' not found on the menu."
-
-    # Update state
-    current_items = runtime.state.get("user", {}).get("items", [])
     
-    # Check if item already in cart
-    updated_items = []
-    item_in_cart = False
-    
-    for cart_item in current_items:
-        if cart_item.get("item_id") == target_item.get("item_id"):
-            new_qty = cart_item["quantity"] + quantity
-            if new_qty > 0:
-                cart_item["quantity"] = new_qty
-                updated_items.append(cart_item)
-            item_in_cart = True
-        else:
-            updated_items.append(cart_item)
-    
-    if not item_in_cart and quantity > 0:
-        updated_items.append({
-            "item_id": target_item.get("item_id"),
-            "quantity": quantity,
-            "name": target_item.get("name"),
-            "price": float(target_item.get("price", 0))
-        })
+    # Construct the delta item
+    delta_item = {
+        "item_id": target_item.get("item_id"),
+        "quantity": quantity,
+        "name": target_item.get("name"),
+        "price": float(target_item.get("price", 0))
+    }
 
     return Command(
         update={
-            "user": {"items": updated_items},
+            # We return a list containing just the *change*.
+            # The merge_user reducer will handle adding this to the existing list.
+            "user": {"items": [delta_item]},
             "messages": [
                 ToolMessage(
                     f"Added {quantity}x {target_item.get('name')} to your cart.",

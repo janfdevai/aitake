@@ -4250,3 +4250,1083 @@ Message sent successfully to 523317603281: {"messaging_product":"whatsapp","cont
     }
   ]
 }
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMjVCRTJBRTA4NTNFNUI1NDk2ODlBMTQ3RjM1NkQwAA==",
+                "timestamp": "1771268938",
+                "text": {
+                  "body": "Que onda"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: Que onda, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Que onda", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjYwNzU5RUJEMkExNTFGRTlFOQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjYwNzU5RUJEMkExNTFGRTlFOQA=",
+                "status": "sent",
+                "timestamp": "1771268944",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjYwNzU5RUJEMkExNTFGRTlFOQA=",
+                "status": "read",
+                "timestamp": "1771268944",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDRjY2NTdGMTEzNTUwMTNFMzI2ODBDMzU1QzkxQjBFAA==",
+                "timestamp": "1771268955",
+                "text": {
+                  "body": "Si"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: Si, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Si", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkE0MzAwQjgxMjFEODFCOUU1MQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkE0MzAwQjgxMjFEODFCOUU1MQA=",
+                "status": "sent",
+                "timestamp": "1771268962",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkE0MzAwQjgxMjFEODFCOUU1MQA=",
+                "status": "read",
+                "timestamp": "1771268962",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMzJCMDE3NTc4NjA2MjVDRUIxRjk2MERFNTMzRUFEAA==",
+                "timestamp": "1771268977",
+                "text": {
+                  "body": "Dame dos pizzas y 2 tacos"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: Dame dos pizzas y 2 tacos, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Dame dos pizzas y 2 tacos", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjZCMjdDODBGNEVEMjk5NEQ2OAA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjZCMjdDODBGNEVEMjk5NEQ2OAA=",
+                "status": "sent",
+                "timestamp": "1771268986",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjZCMjdDODBGNEVEMjk5NEQ2OAA=",
+                "status": "read",
+                "timestamp": "1771268986",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQkVCNTY2RkQ5MjEwRjM3M0MyNjYzRDc0N0IyQjY0AA==",
+                "timestamp": "1771268995",
+                "text": {
+                  "body": "Una hamburguesa"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: Una hamburguesa, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Una hamburguesa", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkFDQ0ZFQjE2RUEzRUQxMUU0MQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkFDQ0ZFQjE2RUEzRUQxMUU0MQA=",
+                "status": "sent",
+                "timestamp": "1771269003",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkFDQ0ZFQjE2RUEzRUQxMUU0MQA=",
+                "status": "read",
+                "timestamp": "1771269003",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDODYyQzFGNDlGMzhFOTQzNTc3OTBEQjMxRTgzNzQxAA==",
+                "timestamp": "1771269021",
+                "text": {
+                  "body": "No, cu\u00e1nto ser\u00eda?"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: No, cuánto sería?, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "No, cu\u00e1nto ser\u00eda?", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjIzOTVCQjNEMkJFN0IxOEQ2MwA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjIzOTVCQjNEMkJFN0IxOEQ2MwA=",
+                "status": "sent",
+                "timestamp": "1771269034",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjIzOTVCQjNEMkJFN0IxOEQ2MwA=",
+                "status": "read",
+                "timestamp": "1771269035",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDRkY2NjFFQzM0OTU4N0QwRTAzRTZBQTY3QTEyOUYxAA==",
+                "timestamp": "1771269043",
+                "text": {
+                  "body": "Paso por el"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: Paso por el, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Paso por el", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjM3NTM1QjM1RjY5QzNENzY2NwA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjM3NTM1QjM1RjY5QzNENzY2NwA=",
+                "status": "sent",
+                "timestamp": "1771269052",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjM3NTM1QjM1RjY5QzNENzY2NwA=",
+                "status": "read",
+                "timestamp": "1771269053",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQjFGNDc5NkVFQjVEQzI5MEQ0NjI1ODUxQTQ3RTY1AA==",
+                "timestamp": "1771269058",
+                "text": {
+                  "body": "No"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: No, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "No", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjQ5RTREQjE5NUUzOEJBNTJDNQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjQ5RTREQjE5NUUzOEJBNTJDNQA=",
+                "status": "sent",
+                "timestamp": "1771269075",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjQ5RTREQjE5NUUzOEJBNTJDNQA=",
+                "status": "read",
+                "timestamp": "1771269076",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQUY4OEFCMjZFRTc2NzVFQTQyQTc4MkJBNzczRTY1AA==",
+                "timestamp": "1771269094",
+                "text": {
+                  "body": "En efectivo"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: En efectivo, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "En efectivo", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjNGMTU0MkQxMTgzNjA2NjFCNgA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjNGMTU0MkQxMTgzNjA2NjFCNgA=",
+                "status": "sent",
+                "timestamp": "1771269100",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjNGMTU0MkQxMTgzNjA2NjFCNgA=",
+                "status": "read",
+                "timestamp": "1771269101",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMUM2ODA5MEVERUQ4RjU2RUY0RkFFRjlCOThCOTQyAA==",
+                "timestamp": "1771269109",
+                "text": {
+                  "body": "Ok gracias"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}]
+Processed Message: Ok gracias, From: 523317603281, Business: 15551775877
+Resolved business_uuid: aeffb628-a32f-4ac8-9db5-80e30783acba, client_uuid: 62fd9c56-855c-4e87-afef-baeebd607366, conversation_id: c27dbaad-1100-44ef-91b6-78079ad461d4
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Ok gracias", "thread_id": "523317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkE2NjdCNjYxMDczRDAxMDMyNwA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkE2NjdCNjYxMDczRDAxMDMyNwA=",
+                "status": "read",
+                "timestamp": "1771269114",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkE2NjdCNjYxMDczRDAxMDMyNwA=",
+                "status": "sent",
+                "timestamp": "1771269114",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
