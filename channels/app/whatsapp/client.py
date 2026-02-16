@@ -8,7 +8,14 @@ async def mark_message_as_read(message_id: str):
         "message_id": message_id,
         "typing_indicator": {"type": "text"},
     }
-    await client.post(MESSAGES_URL, json=payload, headers=HEADERS)
+    response = await client.post(MESSAGES_URL, json=payload, headers=HEADERS)
+    try:
+        response.raise_for_status()
+    except Exception as e:
+        print(f"Error marking message as read: {e}")
+        print(f"Response: {response.text}")
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Error marking message as read: {e}\nResponse: {response.text}\n")
 
 async def send_whatsapp_text_message(to_number: str, text: str):
     print("Sending text message to: ", to_number)
@@ -18,7 +25,17 @@ async def send_whatsapp_text_message(to_number: str, text: str):
         "type": "text",
         "text": {"body": text},
     }
-    await client.post(MESSAGES_URL, json=payload, headers=HEADERS)
+    response = await client.post(MESSAGES_URL, json=payload, headers=HEADERS)
+    try:
+        response.raise_for_status()
+        print(f"Message sent successfully to {to_number}")
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Message sent successfully to {to_number}: {response.text}\n")
+    except Exception as e:
+        print(f"Error sending text message: {e}")
+        print(f"Response: {response.text}")
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Error sending text message to {to_number}: {e}\nResponse: {response.text}\n")
 
 async def upload_media(file_path: str):
     upload_headers = {
@@ -50,4 +67,14 @@ async def send_whatsapp_image_message(to_number: str, caption: str, media_id: st
             "caption": caption,
         },
     }
-    await client.post(MESSAGES_URL, json=payload, headers=HEADERS)
+    response = await client.post(MESSAGES_URL, json=payload, headers=HEADERS)
+    try:
+        response.raise_for_status()
+        print(f"Image message sent successfully to {to_number}")
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Image message sent successfully to {to_number}: {response.text}\n")
+    except Exception as e:
+        print(f"Error sending image message: {e}")
+        print(f"Response: {response.text}")
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Error sending image message to {to_number}: {e}\nResponse: {response.text}\n")

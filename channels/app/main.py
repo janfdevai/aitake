@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
-from app.whatsapp.utils import remove_extra_one
-
 load_dotenv(override=True)
 
-from fastapi import BackgroundTasks, FastAPI, Request, Response
+from app.whatsapp.utils import remove_extra_one
 
+from fastapi import BackgroundTasks, FastAPI, Request, Response
+from pydantic import BaseModel
 from app.whatsapp import Subscription, process_request, verify_subscription, send_whatsapp_text_message
 
 app = FastAPI()
@@ -27,8 +27,14 @@ async def handle_message(request: Request, background_tasks: BackgroundTasks):
     await process_request(request, background_tasks)
     return {"status": "success"}
 
+class MessageRequest(BaseModel):
+    phone_number: str
+    content: str
+
 @app.post("/send-message")
-async def send_message(phone_number: str, content: str):
-    from_number = remove_extra_one(phone_number)
-    await send_whatsapp_text_message(from_number, content)
+async def send_message(payload: MessageRequest):
+    with open("debug_log.txt", "a") as f:
+        f.write(f"\n--- Manual Send Request ---\nPhone: {payload.phone_number}, Content: {payload.content}\n")
+    from_number = remove_extra_one(payload.phone_number)
+    await send_whatsapp_text_message(from_number, payload.content)
     return {"status": "success"}

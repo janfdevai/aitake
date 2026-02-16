@@ -16,7 +16,6 @@ from .utils import process_message_type, remove_extra_one
 
 # Configuration
 ORDERBOT_API_URL = os.getenv("ORDERBOT_API_URL", "http://localhost:8001")
-DB_API_URL = os.getenv("DB_API_URL", "http://localhost:8000")
 
 def verify_subscription(subscription: Subscription):
     if subscription.mode == "subscribe" and subscription.token == VERIFY_TOKEN:
@@ -38,17 +37,18 @@ async def process_message_answer(response_text: str, image_path: str, from_numbe
         await send_whatsapp_text_message(from_number, response_text)
 
 
+from .supabase_client import supabase
+
 async def save_message(conversation_id: str, content: str, sender_type: str):
-    async with httpx.AsyncClient() as client:
-        try:
-            payload = {
-                "content": content,
-                "sender_type": sender_type
-            }
-            resp = await client.post(f"{DB_API_URL}/conversations/{conversation_id}/messages", json=payload)
-            resp.raise_for_status()
-        except Exception as e:
-            print(f"Error saving message to DB: {e}")
+    try:
+        payload = {
+            "conversation_id": conversation_id,
+            "content": content,
+            "sender_type": sender_type
+        }
+        supabase.table("messages").insert(payload).execute()
+    except Exception as e:
+        print(f"Error saving message to Supabase: {e}")
 
 
 async def run_agent_and_send_reply(message_content: str, from_number: str, business_number: str, client_wa_id: str, client_name: str, conversation_id: Optional[str] = None):
@@ -65,14 +65,18 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
             }
         }
         
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Calling OrderBot at {ORDERBOT_API_URL}/chat with payload: {json.dumps(payload)}\n")
         async with httpx.AsyncClient() as client:
             resp = await client.post(f"{ORDERBOT_API_URL}/chat", json=payload, timeout=60.0)
+            with open("debug_log.txt", "a") as f:
+                f.write(f"OrderBot status: {resp.status_code}\n")
             resp.raise_for_status()
             data = resp.json()
             
             response_text = data.get("message", "")
-            print("Response Text: ", response_text)
             image_path = data.get("image_path")
+            print(f"Agent Response: {response_text}, Image Path: {image_path}")
             
             # Save bot response to conversation tracking
             if conversation_id and response_text:
@@ -81,6 +85,8 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
             await process_message_answer(response_text, image_path, from_number)
 
     except Exception as e:
+        with open("debug_log.txt", "a") as f:
+            f.write(f"Error in background task: {e}\n")
         print(f"Error in background task: {e}")
         error_msg = "Agent is not available right now. Please try again later."
         if conversation_id:
@@ -92,9 +98,12 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
 
 async def process_request(request: Request, background_tasks: BackgroundTasks):
     data = await request.json()
+    with open("debug_log.txt", "a") as f:
+        f.write(f"\n--- New Request ---\n{json.dumps(data, indent=2)}\n")
     try:
         entry_list = data.get("entry", [])
         if not entry_list:
+            print("No entry found in webhook data")
             return {"status": "no entry"}
             
         entry = entry_list[0]["changes"][0]["value"]
@@ -118,35 +127,52 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
             client_uuid = None
             conversation_id = None
             
-            async with httpx.AsyncClient() as client:
-                try:
-                    # Resolve Business
-                    b_resp = await client.get(f"{DB_API_URL}/businesses/by-phone/{business_phone}")
-                    if b_resp.status_code == 200:
-                        business_uuid = b_resp.json().get("business_id")
+            try:
+                # Resolve Business
+                all_b = supabase.table("businesses").select("*").execute()
+                with open("debug_log.txt", "a") as f:
+                    f.write(f"All businesses in DB: {all_b.data}\n")
+                b_query = supabase.table("businesses").select("business_id").eq("whatsapp_phone_number", business_phone).execute()
+                with open("debug_log.txt", "a") as f:
+                    f.write(f"Business query result: {b_query.data}\n")
+                if b_query.data:
+                    business_uuid = b_query.data[0].get("business_id")
+                
+                if business_uuid:
+                    # Resolve/Create Client
+                    c_query = supabase.table("clients").select("client_id").eq("business_id", business_uuid).eq("wa_id", client_wa_id).execute()
+                    if c_query.data:
+                        client_uuid = c_query.data[0].get("client_id")
+                    else:
+                        new_client = {
+                            "business_id": business_uuid,
+                            "wa_id": client_wa_id,
+                            "full_name": client_name,
+                            "phone_number": client_wa_id
+                        }
+                        c_insert = supabase.table("clients").insert(new_client).execute()
+                        if c_insert.data:
+                            client_uuid = c_insert.data[0].get("client_id")
+                            print(f"Created new client: {client_uuid}")
                     
-                    if business_uuid:
-                        # Resolve/Create Client
-                        c_check = await client.get(f"{DB_API_URL}/businesses/{business_uuid}/clients/wa/{client_wa_id}")
-                        if c_check.status_code == 200:
-                            client_uuid = c_check.json().get("client_id")
+                    if client_uuid:
+                        # Resolve/Create Conversation
+                        conv_query = supabase.table("conversations").select("conversation_id").eq("business_id", business_uuid).eq("client_id", client_uuid).execute()
+                        if conv_query.data:
+                            conversation_id = conv_query.data[0].get("conversation_id")
                         else:
-                            new_client = {
-                                "wa_id": client_wa_id,
-                                "full_name": client_name,
-                                "phone_number": client_wa_id
+                            new_conv = {
+                                "business_id": business_uuid,
+                                "client_id": client_uuid
                             }
-                            c_resp = await client.post(f"{DB_API_URL}/businesses/{business_uuid}/clients", json=new_client)
-                            if c_resp.status_code == 200:
-                                client_uuid = c_resp.json().get("client_id")
-                        
-                        if client_uuid:
-                            # Resolve/Create Conversation
-                            conv_resp = await client.get(f"{DB_API_URL}/businesses/{business_uuid}/conversations/client/{client_uuid}")
-                            if conv_resp.status_code == 200:
-                                conversation_id = conv_resp.json().get("conversation_id")
-                except Exception as e:
-                    print(f"Error in tracking setup: {e}")
+                            conv_insert = supabase.table("conversations").insert(new_conv).execute()
+                            if conv_insert.data:
+                                conversation_id = conv_insert.data[0].get("conversation_id")
+                                print(f"Created new conversation: {conversation_id}")
+            except Exception as e:
+                with open("debug_log.txt", "a") as f:
+                    f.write(f"Supabase Error: {e}\n")
+                print(f"Error in Supabase tracking setup: {e}")
 
             message = entry["messages"][0]
             message_id = message.get("id")
@@ -157,6 +183,10 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
             
             # Process message content
             message_content = await process_message_type(message)
+            with open("debug_log.txt", "a") as f:
+                f.write(f"Processed Message: {message_content}, From: {from_number}, Business: {business_phone}\n")
+                f.write(f"Resolved business_uuid: {business_uuid}, client_uuid: {client_uuid}, conversation_id: {conversation_id}\n")
+            print(f"Message from {from_number}: {message_content}")
             
             # 2. Save incoming message to conversation tracking
             if conversation_id:

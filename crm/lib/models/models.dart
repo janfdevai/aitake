@@ -10,13 +10,13 @@ class Manager {
   final String managerId;
   final String fullName;
   final String email;
-  final String? gcpUid;
+  final String? authUserId;
 
   Manager({
     required this.managerId,
     required this.fullName,
     required this.email,
-    this.gcpUid,
+    this.authUserId,
   });
 
   factory Manager.fromJson(Map<String, dynamic> json) {
@@ -24,7 +24,7 @@ class Manager {
       managerId: json['manager_id'],
       fullName: json['full_name'],
       email: json['email'],
-      gcpUid: json['gcp_uid'],
+      authUserId: json['auth_user_id'],
     );
   }
 
@@ -32,7 +32,7 @@ class Manager {
     'manager_id': managerId,
     'full_name': fullName,
     'email': email,
-    'gcp_uid': gcpUid,
+    'auth_user_id': authUserId,
   };
 }
 
@@ -43,6 +43,8 @@ class Business {
   final String? address;
   final String? logoUrl;
   final bool isActive;
+
+  String get id => businessId;
 
   Business({
     required this.businessId,
@@ -244,6 +246,26 @@ class Conversation {
     this.clientName,
     this.clientWaId,
   });
+
+  Conversation copyWith({
+    String? conversationId,
+    String? businessId,
+    String? clientId,
+    String? lastMessage,
+    DateTime? updatedAt,
+    String? clientName,
+    String? clientWaId,
+  }) {
+    return Conversation(
+      conversationId: conversationId ?? this.conversationId,
+      businessId: businessId ?? this.businessId,
+      clientId: clientId ?? this.clientId,
+      lastMessage: lastMessage ?? this.lastMessage,
+      updatedAt: updatedAt ?? this.updatedAt,
+      clientName: clientName ?? this.clientName,
+      clientWaId: clientWaId ?? this.clientWaId,
+    );
+  }
 
   factory Conversation.fromJson(Map<String, dynamic> json) {
     return Conversation(

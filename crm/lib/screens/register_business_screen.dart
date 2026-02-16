@@ -19,7 +19,9 @@ class _RegisterBusinessScreenState
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   @override
   void dispose() {
@@ -28,6 +30,7 @@ class _RegisterBusinessScreenState
     _emailController.dispose();
     _addressController.dispose();
     _phoneController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -71,6 +74,25 @@ class _RegisterBusinessScreenState
                 validator: (v) => v!.isEmpty || !v.contains('@')
                     ? 'Valid email required'
                     : null,
+              ),
+              const SizedBox(height: 16),
+              _buildTextField(
+                'Create Password',
+                Icons.lock_outline,
+                _passwordController,
+                obscureText: _obscurePassword,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
+                  },
+                ),
+                validator: (v) =>
+                    v!.isEmpty || v.length < 6 ? 'Min 6 characters' : null,
               ),
               const SizedBox(height: 32),
               _sectionHeader('Business Information'),
@@ -151,14 +173,18 @@ class _RegisterBusinessScreenState
     TextEditingController controller, {
     String? Function(String?)? validator,
     TextInputType? keyboardType,
+    bool obscureText = false,
+    Widget? suffixIcon,
   }) {
     return TextFormField(
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,
+      obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
         prefixIcon: Icon(icon),
+        suffixIcon: suffixIcon,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
         filled: true,
         fillColor: Colors.white,
@@ -176,11 +202,20 @@ class _RegisterBusinessScreenState
     try {
       final apiService = ref.read(apiServiceProvider);
 
-      // 1. Create Manager
+      final email = _emailController.text.trim();
+      final password = _passwordController.text.trim();
+
+      // 1. Register in Supabase Auth
+      final authResponse = await apiService.register(email, password);
+      final user = authResponse.user;
+
+      if (user == null) throw Exception('Auth registration failed');
+
+      // 2. Create Manager in Database
       final managerData = {
         'full_name': _managerNameController.text.trim(),
-        'email': _emailController.text.trim(),
-        'gcp_uid': _emailController.text.trim(),
+        'email': email,
+        'auth_user_id': user.id,
       };
 
       final manager = await apiService.createManager(managerData);

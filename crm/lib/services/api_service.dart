@@ -1,187 +1,179 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/models.dart';
 
 class ApiService {
-  final String baseUrl;
+  final supabase = Supabase.instance.client;
 
-  ApiService({String? baseUrl})
-    : baseUrl =
-          baseUrl ??
-          (kIsWeb
-              ? 'http://127.0.0.1:8000'
-              : Platform.isAndroid
-              ? 'http://10.0.2.2:8000'
-              : 'http://127.0.0.1:8000');
+  // --- AUTH & MANAGER ---
+  Future<void> login(String email, String password) async {
+    await supabase.auth.signInWithPassword(email: email, password: password);
+  }
 
-  Future<Manager> login(String email) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/managers/login?email=$email'),
-    );
-    if (response.statusCode == 200) {
-      return Manager.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to login: ${response.statusCode}');
+  Future<AuthResponse> register(String email, String password) async {
+    return await supabase.auth.signUp(email: email, password: password);
+  }
+
+  Future<Manager?> getCurrentManager() async {
+    final user = supabase.auth.currentUser;
+    if (user == null) return null;
+
+    final response = await supabase
+        .from('managers')
+        .select()
+        .eq('email', user.email!)
+        .maybeSingle();
+
+    if (response == null) return null;
+
+    final manager = Manager.fromJson(response);
+
+    // Link Supabase Auth ID if not already linked
+    if (manager.authUserId == null) {
+      await supabase
+          .from('managers')
+          .update({'auth_user_id': user.id})
+          .eq('manager_id', manager.managerId);
     }
+
+    return manager;
   }
 
   Future<List<Business>> getManagerBusinesses(String managerId) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/managers/$managerId/businesses'),
-    );
-    if (response.statusCode == 200) {
-      List data = json.decode(response.body);
-      return data.map((item) => Business.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load manager businesses');
-    }
+    final response = await supabase
+        .from('business_managers')
+        .select('''
+          businesses (*)
+        ''')
+        .eq('manager_id', managerId);
+
+    return (response as List)
+        .map((item) => Business.fromJson(item['businesses']))
+        .toList();
   }
 
   Future<Manager> createManager(Map<String, dynamic> data) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/managers'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(data),
-    );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return Manager.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to create manager: ${response.body}');
-    }
+    final response = await supabase
+        .from('managers')
+        .insert(data)
+        .select()
+        .single();
+    return Manager.fromJson(response);
   }
 
+  // --- BUSINESS ---
   Future<List<Business>> getBusinesses() async {
-    try {
-      final response = await http.get(Uri.parse('$baseUrl/businesses'));
-      if (response.statusCode == 200) {
-        List data = json.decode(response.body);
-        return data.map((item) => Business.fromJson(item)).toList();
-      } else {
-        throw Exception('Failed to load businesses: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error fetching businesses: $e');
-      rethrow;
-    }
-  }
-
-  Future<List<MenuItem>> getMenuItems(String businessId) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/businesses/$businessId/menu'),
-    );
-    if (response.statusCode == 200) {
-      List data = json.decode(response.body);
-      return data.map((item) => MenuItem.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load menu items');
-    }
-  }
-
-  Future<List<Order>> getOrders(
-    String businessId, {
-    OrderStatus? status,
-  }) async {
-    String url = '$baseUrl/businesses/$businessId/orders';
-    if (status != null) {
-      url += '?status=${status.name}';
-    }
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      List data = json.decode(response.body);
-      return data.map((item) => Order.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load orders');
-    }
-  }
-
-  Future<Order> updateOrderStatus(String orderId, OrderStatus status) async {
-    final response = await http.patch(
-      Uri.parse('$baseUrl/orders/$orderId/status?status=${status.name}'),
-    );
-    if (response.statusCode == 200) {
-      return Order.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to update order status');
-    }
-  }
-
-  Future<MenuItem> createMenuItem(
-    String businessId,
-    Map<String, dynamic> itemData,
-  ) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/businesses/$businessId/menu'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(itemData),
-    );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return MenuItem.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to create menu item: ${response.body}');
-    }
-  }
-
-  Future<MenuItem> updateMenuItem(
-    String itemId,
-    Map<String, dynamic> updates,
-  ) async {
-    final response = await http.patch(
-      Uri.parse('$baseUrl/menu/$itemId'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(updates),
-    );
-    if (response.statusCode == 200) {
-      return MenuItem.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to update menu item');
-    }
+    final response = await supabase.from('businesses').select();
+    return (response as List).map((item) => Business.fromJson(item)).toList();
   }
 
   Future<Business> createBusiness(
     Map<String, dynamic> data, {
     String? managerId,
   }) async {
-    String url = '$baseUrl/businesses';
+    final businessResponse = await supabase
+        .from('businesses')
+        .insert(data)
+        .select()
+        .single();
+    final business = Business.fromJson(businessResponse);
+
     if (managerId != null) {
-      url += '?manager_id=$managerId';
+      await supabase.from('business_managers').insert({
+        'business_id': business.id,
+        'manager_id': managerId,
+      });
     }
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(data),
-    );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return Business.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to create business: ${response.body}');
-    }
+
+    return business;
   }
 
-  // --- CONVERSATIONS ---
-  Future<List<Conversation>> getConversations(String businessId) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/businesses/$businessId/conversations'),
-    );
-    if (response.statusCode == 200) {
-      List data = json.decode(response.body);
-      return data.map((item) => Conversation.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load conversations');
+  // --- MENU ---
+  Future<List<MenuItem>> getMenuItems(String businessId) async {
+    final response = await supabase
+        .from('menu_items')
+        .select()
+        .eq('business_id', businessId);
+    return (response as List).map((item) => MenuItem.fromJson(item)).toList();
+  }
+
+  Future<MenuItem> createMenuItem(
+    String businessId,
+    Map<String, dynamic> itemData,
+  ) async {
+    final response = await supabase
+        .from('menu_items')
+        .insert({...itemData, 'business_id': businessId})
+        .select()
+        .single();
+    return MenuItem.fromJson(response);
+  }
+
+  Future<MenuItem> updateMenuItem(
+    String itemId,
+    Map<String, dynamic> updates,
+  ) async {
+    final response = await supabase
+        .from('menu_items')
+        .update(updates)
+        .eq('item_id', itemId)
+        .select()
+        .single();
+    return MenuItem.fromJson(response);
+  }
+
+  // --- ORDERS ---
+  Future<List<Order>> getOrders(
+    String businessId, {
+    OrderStatus? status,
+  }) async {
+    var query = supabase
+        .from('orders')
+        .select('*, items:order_items(*)')
+        .eq('business_id', businessId);
+
+    if (status != null) {
+      query = query.eq('status', status.name);
     }
+
+    final response = await query.order('ordered_at', ascending: false);
+    return (response as List).map((item) => Order.fromJson(item)).toList();
+  }
+
+  Future<Order> updateOrderStatus(String orderId, OrderStatus status) async {
+    final response = await supabase
+        .from('orders')
+        .update({'status': status.name})
+        .eq('order_id', orderId)
+        .select('*, items:order_items(*)')
+        .single();
+    return Order.fromJson(response);
+  }
+
+  // --- CONVERSATIONS & MESSAGES ---
+  Future<List<Conversation>> getConversations(String businessId) async {
+    final response = await supabase
+        .from('conversations')
+        .select('*, client:clients(*)')
+        .eq('business_id', businessId)
+        .order('updated_at', ascending: false);
+
+    return (response as List).map((item) {
+      final conv = Conversation.fromJson(item);
+      // Map extra fields from client for list view
+      return conv.copyWith(
+        clientName: item['client']['full_name'],
+        clientWaId: item['client']['wa_id'],
+      );
+    }).toList();
   }
 
   Future<List<Message>> getMessages(String conversationId) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/conversations/$conversationId/messages'),
-    );
-    if (response.statusCode == 200) {
-      List data = json.decode(response.body);
-      return data.map((item) => Message.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load messages');
-    }
+    final response = await supabase
+        .from('messages')
+        .select()
+        .eq('conversation_id', conversationId)
+        .order('created_at', ascending: true);
+    return (response as List).map((item) => Message.fromJson(item)).toList();
   }
 
   Future<Message> sendMessage(
@@ -189,15 +181,34 @@ class ApiService {
     String content,
     SenderType senderType,
   ) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/conversations/$conversationId/messages'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({'content': content, 'sender_type': senderType.name}),
-    );
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      return Message.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Failed to send message: ${response.body}');
-    }
+    final response = await supabase
+        .from('messages')
+        .insert({
+          'conversation_id': conversationId,
+          'content': content,
+          'sender_type': senderType.name,
+        })
+        .select()
+        .single();
+    return Message.fromJson(response);
+  }
+
+  // --- REALTIME ---
+  Stream<List<Order>> subscribeToOrders(String businessId) {
+    return supabase
+        .from('orders')
+        .stream(primaryKey: ['order_id'])
+        .eq('business_id', businessId)
+        .order('ordered_at', ascending: false)
+        .map((data) => data.map((item) => Order.fromJson(item)).toList());
+  }
+
+  Stream<List<Message>> subscribeToMessages(String conversationId) {
+    return supabase
+        .from('messages')
+        .stream(primaryKey: ['message_id'])
+        .eq('conversation_id', conversationId)
+        .order('created_at', ascending: true)
+        .map((data) => data.map((item) => Message.fromJson(item)).toList());
   }
 }

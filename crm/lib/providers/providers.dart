@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import '../services/api_service.dart';
 import '../models/models.dart';
 
@@ -12,7 +13,43 @@ final businessesProvider = FutureProvider<List<Business>>((ref) async {
 
 final selectedBusinessIdProvider = StateProvider<String?>((ref) => null);
 
-final currentManagerProvider = StateProvider<Manager?>((ref) => null);
+final currentManagerProvider = StateNotifierProvider<ManagerNotifier, Manager?>(
+  (ref) {
+    return ManagerNotifier(ref);
+  },
+);
+
+class ManagerNotifier extends StateNotifier<Manager?> {
+  final Ref ref;
+  ManagerNotifier(this.ref) : super(null) {
+    _init();
+  }
+
+  void _init() {
+    final supabase = ref.read(apiServiceProvider).supabase;
+
+    // Listen to Auth state changes
+    supabase.auth.onAuthStateChange.listen((data) async {
+      final AuthChangeEvent event = data.event;
+      final Session? session = data.session;
+
+      if (event == AuthChangeEvent.signedIn && session != null) {
+        final manager = await ref.read(apiServiceProvider).getCurrentManager();
+        state = manager;
+      } else if (event == AuthChangeEvent.signedOut) {
+        state = null;
+      }
+    });
+
+    // Check initial session
+    final session = supabase.auth.currentSession;
+    if (session != null) {
+      ref.read(apiServiceProvider).getCurrentManager().then((manager) {
+        state = manager;
+      });
+    }
+  }
+}
 
 final managerBusinessesProvider = FutureProvider<List<Business>>((ref) async {
   final manager = ref.watch(currentManagerProvider);

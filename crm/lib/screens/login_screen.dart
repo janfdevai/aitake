@@ -14,7 +14,9 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +74,30 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         decoration: InputDecoration(
                           labelText: 'Email Address',
                           prefixIcon: const Icon(Icons.email_outlined),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      TextField(
+                        controller: _passwordController,
+                        obscureText: _obscurePassword,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          prefixIcon: const Icon(Icons.lock_outline),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscurePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscurePassword = !_obscurePassword;
+                              });
+                            },
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -137,7 +163,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void _handleLogin() async {
-    if (_emailController.text.isEmpty) return;
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please enter both email and password')),
+        );
+      }
+      return;
+    }
 
     setState(() {
       _isLoading = true;
@@ -145,14 +181,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     try {
       final apiService = ref.read(apiServiceProvider);
-      final manager = await apiService.login(_emailController.text.trim());
-
-      ref.read(currentManagerProvider.notifier).state = manager;
+      await apiService.login(email, password);
 
       if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const BusinessListScreen()),
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Login successful!'),
+            duration: Duration(seconds: 2),
+            backgroundColor: Colors.green,
+          ),
         );
       }
     } catch (e) {
@@ -168,5 +205,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         });
       }
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Listen for manager state changes to navigate away from login
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.listenManual(currentManagerProvider, (previous, next) {
+        if (next != null && mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const BusinessListScreen()),
+          );
+        }
+      });
+    });
   }
 }

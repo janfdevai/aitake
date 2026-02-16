@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'theme/app_theme.dart';
 import 'screens/login_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://kxwwlqoybtoocijtqsfg.supabase.co',
+    anonKey: 'sb_publishable_bQOnn5kxiEgY142f7_TfuQ_J3adZltl',
+  );
+
   runApp(const ProviderScope(child: MainApp()));
 }
 

@@ -18,7 +18,7 @@ class BusinessListScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
-              ref.read(currentManagerProvider.notifier).state = null;
+              ref.read(apiServiceProvider).supabase.auth.signOut();
               ref.read(selectedBusinessIdProvider.notifier).state = null;
               Navigator.pushAndRemoveUntil(
                 context,

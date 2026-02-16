@@ -1,14 +1,30 @@
 import os
-import httpx
 from typing import Optional, Dict, Any, List
-
 from langchain.messages import ToolMessage
 from langchain.tools import ToolRuntime, tool
 from langgraph.types import Command
+from app.supabase_client import supabase
 
-# Assume DB API is running on localhost:8000. 
-# In a real setup, this should be configurable via env vars.
-DB_API_URL = os.getenv("DB_API_URL", "http://localhost:8000")
+# Business resolution helper
+def _get_business_id(phone_number: str) -> Optional[str]:
+    """Helper to resolve business UUID from phone number."""
+    try:
+        response = supabase.table("businesses").select("business_id").eq("whatsapp_phone_number", phone_number).execute()
+        if response.data:
+            return response.data[0].get("business_id")
+        return None
+    except Exception as e:
+        print(f"Error fetching business ID from Supabase: {e}")
+        return None
+
+def _get_menu_items(business_id: str) -> List[Dict[str, Any]]:
+    try:
+        # Note: 'menu_items' table uses 'item_id', 'name', 'price', etc.
+        response = supabase.table("menu_items").select("*").eq("business_id", business_id).execute()
+        return response.data or []
+    except Exception as e:
+        print(f"Error fetching menu from Supabase: {e}")
+        return []
 
 @tool
 def get_user_phone_number(runtime: ToolRuntime) -> str:
@@ -37,36 +53,7 @@ def update_user_name(user_name: str, runtime: ToolRuntime) -> Command:
         }
     )
 
-def _get_business_id(phone_number: str) -> Optional[str]:
-    """Helper to resolve business UUID from phone number."""
-    try:
-        # Use simple synchronous call or async? Tools can be async but here we are using def.
-        # LangChain tools can be async, but standard def runs in threadpool.
-        # We'll use httpx.get (sync) for simplicity in this synchronous tool definition.
-        
-        # Note: If running inside an async loop, sync httpx might block the loop if not careful.
-        # But for now, we'll assume it's fine or refactor to async def if needed.
-        # Given FastAPI runs these, async def is better for the agent.
-        # However, the current tools are 'def'. Let's stick to sync for compatibility or switch to async def.
-        # The previous tools were sync (using `with Session(engine) as session`).
-        # So sync httpx is comparable.
-        
-        response = httpx.get(f"{DB_API_URL}/businesses/by-phone/{phone_number}")
-        response.raise_for_status()
-        data = response.json()
-        return data.get("business_id")
-    except Exception as e:
-        print(f"Error fetching business ID: {e}")
-        return None
-
-def _get_menu_items(business_id: str) -> List[Dict[str, Any]]:
-    try:
-        response = httpx.get(f"{DB_API_URL}/businesses/{business_id}/menu")
-        response.raise_for_status()
-        return response.json()
-    except Exception as e:
-        print(f"Error fetching menu: {e}")
-        return []
+# These are now merged into the top-level helpers or handled by supabase client
 
 @tool
 def get_menu(runtime: ToolRuntime) -> str:
@@ -205,49 +192,70 @@ def add_order(delivery_type: str, address: Optional[str], runtime: ToolRuntime) 
         
         # Try to find client
         try:
-            resp = httpx.get(f"{DB_API_URL}/businesses/{business_id}/clients/wa/{client_phone}")
-            if resp.status_code == 200:
-                client_id = resp.json().get("client_id")
-        except:
-            pass
+            c_query = supabase.table("clients").select("client_id").eq("business_id", business_id).eq("wa_id", client_phone).execute()
+            if c_query.data:
+                client_id = c_query.data[0].get("client_id")
+        except Exception as e:
+            print(f"Error checking client: {e}")
             
         # If not found, create
         if not client_id:
             try:
                 new_client = {
+                    "business_id": business_id,
                     "wa_id": client_phone,
                     "full_name": client_name,
                     "phone_number": client_phone
                 }
-                create_resp = httpx.post(f"{DB_API_URL}/businesses/{business_id}/clients", json=new_client)
-                create_resp.raise_for_status()
-                client_id = create_resp.json().get("client_id")
+                c_insert = supabase.table("clients").insert(new_client).execute()
+                if c_insert.data:
+                    client_id = c_insert.data[0].get("client_id")
             except Exception as e:
-                return f"Error creating client record: {e}"
+                return f"Error creating client record in Supabase: {e}"
+
+        if not client_id:
+            return "Error: Failed to resolve client ID."
 
         # 3. Create Order
-        items_data = [{"item_id": i["item_id"], "quantity": i["quantity"]} for i in cart_items]
+        # First, calculate total amount
+        total_amount = sum(i["quantity"] * i["price"] for i in cart_items)
         
         order_payload = {
+            "business_id": business_id,
             "client_id": client_id,
             "delivery_type": delivery_type.lower(),
             "delivery_address": address if delivery_type.lower() == "delivery" else None,
-            "items": items_data
+            "total_amount": total_amount,
+            "status": "pending"
         }
         
-        order_resp = httpx.post(f"{DB_API_URL}/businesses/{business_id}/orders", json=order_payload)
-        order_resp.raise_for_status()
-        order_data = order_resp.json()
-        
-        total = order_data.get("total_amount", 0)
+        order_insert = supabase.table("orders").insert(order_payload).execute()
+        if not order_insert.data:
+            return "Error: Failed to create order in Supabase."
+            
+        order_data = order_insert.data[0]
         order_uuid = order_data.get("order_id")
+
+        # 4. Create Order Items
+        items_payload = []
+        for i in cart_items:
+            items_payload.append({
+                "order_id": order_uuid,
+                "item_id": i["item_id"],
+                "quantity": i["quantity"],
+                "unit_price": i["price"],
+                "name_snapshot": i["name"]
+            })
+        
+        if items_payload:
+            supabase.table("order_items").insert(items_payload).execute()
 
         return Command(
             update={
                 "user": {"items": []}, # Clear cart
                 "messages": [
                     ToolMessage(
-                        f"Order placed successfully! Order ID: {order_uuid}\nTotal: ${total}\nStatus: {order_data.get('status')}",
+                        f"Order placed successfully! Order ID: {order_uuid}\nTotal: ${total_amount:.2f}\nStatus: {order_data.get('status')}",
                         tool_call_id=runtime.tool_call_id,
                     )
                 ]
@@ -255,7 +263,7 @@ def add_order(delivery_type: str, address: Optional[str], runtime: ToolRuntime) 
         )
 
     except Exception as e:
-        return f"Error placing order: {e}"
+        return f"Error placing order in Supabase: {e}"
 
 
 @tool

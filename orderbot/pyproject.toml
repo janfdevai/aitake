@@ -12,4 +12,5 @@ dependencies = [
     "langchain-google-genai>=4.2.0",
     "langgraph>=1.0.7",
     "python-dotenv>=1.2.1",
+    "supabase>=2.11.0",
 ]
