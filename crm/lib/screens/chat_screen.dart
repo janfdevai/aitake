@@ -37,6 +37,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         widget.conversation.conversationId,
         content,
         SenderType.business,
+        phoneNumber: widget.conversation.clientWaId,
       );
       ref.invalidate(messagesProvider(widget.conversation.conversationId));
       ref.invalidate(conversationsProvider(widget.conversation.businessId));

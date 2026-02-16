@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/models.dart';
 
 class ApiService {
   final supabase = Supabase.instance.client;
+  // TODO: Move to environment config
+  static const String channelsApiUrl = 'http://localhost:8002';
 
   // --- AUTH & MANAGER ---
   Future<void> login(String email, String password) async {
@@ -179,8 +183,10 @@ class ApiService {
   Future<Message> sendMessage(
     String conversationId,
     String content,
-    SenderType senderType,
-  ) async {
+    SenderType senderType, {
+    String? phoneNumber,
+  }) async {
+    // 1. Insert into Supabase
     final response = await supabase
         .from('messages')
         .insert({
@@ -190,6 +196,26 @@ class ApiService {
         })
         .select()
         .single();
+
+    // 2. Trigger External API (WhatsApp) if sender is business
+    if (senderType == SenderType.business && phoneNumber != null) {
+      try {
+        final uri = Uri.parse('$channelsApiUrl/send-message');
+        final apiResponse = await http.post(
+          uri,
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({'phone_number': phoneNumber, 'content': content}),
+        );
+
+        if (apiResponse.statusCode != 200) {
+          print('Failed to send message via Channels API: ${apiResponse.body}');
+          // Optionally throw or handle error, but we might not want to block the UI since DB insert succeeded
+        }
+      } catch (e) {
+        print('Error calling Channels API: $e');
+      }
+    }
+
     return Message.fromJson(response);
   }
 

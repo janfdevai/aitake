@@ -4,10 +4,19 @@ load_dotenv(override=True)
 from app.whatsapp.utils import remove_extra_one
 
 from fastapi import BackgroundTasks, FastAPI, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.whatsapp import Subscription, process_request, verify_subscription, send_whatsapp_text_message
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
