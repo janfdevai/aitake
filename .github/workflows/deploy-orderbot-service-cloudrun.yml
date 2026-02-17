@@ -16,6 +16,7 @@ jobs:
     uses: ./.github/workflows/deploy-cloudrun-template.yml
     with:
       source_directory: 'orderbot'
+      flags: '--allow-unauthenticated'
     secrets:
       service_name: ${{ secrets.ORDERBOT_SERVICE_NAME }}
       region: ${{ secrets.ORDERBOT_SERVICE_REGION }}
