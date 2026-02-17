@@ -1,8 +1,17 @@
+# Use a slim Python image
 FROM python:3.12-slim
 
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install uv for fast dependency management
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
+WORKDIR /app
 COPY . .
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# Install dependencies
+RUN uv sync
+
+# Expose the port (Cloud Run sets this dynamically)
+EXPOSE 8080
+
+# Run the FastMCP server
+CMD ["uv", "run", "app/main.py"]
