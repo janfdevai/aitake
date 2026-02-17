@@ -1,0 +1,24 @@
+name: 'Build and Deploy Channels Service to Cloud Run'
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "channels/**"
+      - ".github/workflows/deploy-channels-cloudrun.yml"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    uses: ./.github/workflows/deploy-cloudrun-template.yml
+    with:
+      source_directory: 'channels'
+      flags: '--allow-unauthenticated'
+    secrets:
+      service_name: ${{ secrets.CHANNELS_SERVICE_NAME }}
+      region: ${{ secrets.CHANNELS_SERVICE_REGION }}
+      project_id: ${{ secrets.CHANNELS_SERVICE_PROJECT_ID }}
+      workload_identity_provider: ${{ secrets.CHANNELS_SERVICE_WORKLOAD_IDENTITY_PROVIDER }}

@@ -1,0 +1,74 @@
+name: 'deploy-cloudrun-template'
+
+on:
+  workflow_call:
+    inputs:
+      source_directory:
+        required: true
+        type: string
+        description: 'Directory containing the source code and Dockerfile'
+      flags:
+        required: false
+        type: string
+        description: 'Flags for Cloud Run deployment'
+        default: '--no-allow-unauthenticated'
+    secrets:
+      service_name:
+        required: true
+        description: 'Name of the Cloud Run service'
+      region:
+        required: true
+        description: 'GCP Region'
+      project_id:
+        required: true
+        description: 'GCP Project ID'
+      workload_identity_provider:
+        required: true
+        description: 'Workload Identity Provider for GCP authentication'
+
+jobs:
+  deploy:
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: 'Checkout'
+        uses: 'actions/checkout@v4'
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          workload_identity_provider: '${{ secrets.workload_identity_provider }}'
+          service_account: 'github-deployer@${{ secrets.project_id }}.iam.gserviceaccount.com'
+
+      - name: 'Docker Auth'
+        uses: 'docker/login-action@v3'
+        with:
+          username: 'oauth2accesstoken'
+          password: '${{ steps.auth.outputs.access_token }}'
+          registry: '${{ secrets.region }}-docker.pkg.dev'
+
+      - name: 'Build and Push Container'
+        run: |-
+          # Define the full image path
+          DOCKER_TAG="${{ secrets.region }}-docker.pkg.dev/${{ secrets.project_id }}/${{ secrets.service_name }}/${{ secrets.service_name }}:${{ github.sha }}"
+          
+          # Build from the specific subdirectory
+          docker build -t "${DOCKER_TAG}" ./${{ inputs.source_directory }}
+          docker push "${DOCKER_TAG}"
+
+      - id: 'deploy'
+        name: 'Deploy to Cloud Run'
+        uses: 'google-github-actions/deploy-cloudrun@v2'
+        with:
+          service: '${{ secrets.service_name }}'
+          region: '${{ secrets.region }}'
+          image: '${{ secrets.region }}-docker.pkg.dev/${{ secrets.project_id }}/${{ secrets.service_name }}/${{ secrets.service_name }}:${{ github.sha }}'
+          flags: '${{ inputs.flags }}'
+
+      - name: 'Show output'
+        run: echo "Deployed to ${{ steps.deploy.outputs.url }}"
