@@ -8490,3 +8490,30 @@ Message sent successfully to 523317603281: {"messaging_product":"whatsapp","cont
     }
   ]
 }
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+VERIFYING SUBSCRIPTION: mode=None, token=None, challenge=None
+EXPECTED TOKEN: dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+VERIFYING SUBSCRIPTION: mode=None, token=None, challenge=None
+EXPECTED TOKEN: dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+VERIFYING SUBSCRIPTION: mode=None, token=None, challenge=None
+EXPECTED TOKEN: dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+WEBHOOK RECEIVED: mode=subscribe, token=dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4, challenge=1234567890
+VERIFYING SUBSCRIPTION: mode=None, token=None, challenge=None
+EXPECTED TOKEN: dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+WEBHOOK RECEIVED: mode=subscribe, token=dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4, challenge=1234567890
+VERIFYING SUBSCRIPTION: mode=subscribe, token=dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4, challenge=1234567890
+EXPECTED TOKEN: dQ*hpwvMh^i8micZQj8SHBceV9AWtoGx5MNdppSS72b9FNtgmqTLSHgLQDRRq%QIRarwUxExYGR^0QNNvpxtCoLU5zdDwYdqBf@orgIrNsKa2EzSy0SRecYIKjHg3oiW@0SSONJRVakHrIMsvVNY!1E!0ntta8YOkyH77R7Iq^qljQcP9MMVvlXCUTnuAUBWmN7Ak!lcEqJ!fgReWEK9iwULBJeE7A$V%3IQFa1QhrUBl6%fdISFm3rs1ON!Pk4
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208

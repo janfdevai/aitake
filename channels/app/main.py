@@ -3,7 +3,7 @@ load_dotenv(override=True)
 
 from app.whatsapp.utils import remove_extra_one
 
-from fastapi import BackgroundTasks, FastAPI, Request, Response
+from fastapi import BackgroundTasks, FastAPI, Request, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.whatsapp import Subscription, process_request, verify_subscription, send_whatsapp_text_message
@@ -21,12 +21,21 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Hello WhatsApp Webhook"}
+    return {"message": "Hello WhatsApp Webhook UPDATED"}
 
+
+from fastapi import BackgroundTasks, FastAPI, Request, Response, Depends
+
+from fastapi import Query
 
 @app.get("/webhook")
-async def verify_webhook(subscription: Subscription):
+async def verify_webhook(
+    mode: str = Query(None, alias="hub.mode"),
+    token: str = Query(None, alias="hub.verify_token"),
+    challenge: str = Query(None, alias="hub.challenge")
+):
     """Handshake for Meta to verify your server."""
+    subscription = Subscription(mode=mode, token=token, challenge=challenge)
     return verify_subscription(subscription) or Response(status_code=403)
 
 
