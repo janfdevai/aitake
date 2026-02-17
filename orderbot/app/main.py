@@ -1,16 +1,33 @@
 from fastapi import FastAPI, HTTPException
 from contextlib import asynccontextmanager
+import os
 from dotenv import load_dotenv
+from psycopg_pool import AsyncConnectionPool
+from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+from app.team import order_agent_builder, compile_agent
 
 load_dotenv(override=True)
 
 from app.schemas import MessageRequest, ChatResponse
-from app.team import order_agent
+from app.schemas import MessageRequest, ChatResponse
 
 @asynccontextmanager
+@asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Initialize any resources here if needed
-    yield
+    # Initialize Postgres connection pool
+    async with AsyncConnectionPool(
+        # Use DATABASE_URL or fallback to SUPABASE_URL if formatted correctly for postgres
+        conninfo=os.getenv("DATABASE_URL", os.getenv("SUPABASE_URL")),
+        max_size=20,
+        kwargs={"autocommit": True}
+    ) as pool:
+        checkpointer = AsyncPostgresSaver(pool)
+        
+        # NOTE: you need to call .setup() the first time you're using your checkpointer
+        await checkpointer.setup()
+        
+        app.state.order_agent = compile_agent(order_agent_builder, checkpointer)
+        yield
 
 app = FastAPI(title="OrderBot API", lifespan=lifespan)
 
@@ -40,7 +57,7 @@ async def chat(request: MessageRequest):
         config = {"configurable": {"thread_id": request.thread_id}}
         
         # Invoke the agent
-        result = await order_agent.ainvoke(input_state, config)
+        result = await request.app.state.order_agent.ainvoke(input_state, config)
         
         # Extract response
         # The result state contains "messages", the last one should be the bot's reply

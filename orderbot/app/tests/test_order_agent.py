@@ -1,4 +1,9 @@
 import asyncio
+from dotenv import load_dotenv
+
+load_dotenv(override=True)
+
+from langgraph.checkpoint.memory import InMemorySaver
 
 from agentevals.trajectory.llm import (
     TRAJECTORY_ACCURACY_PROMPT,
@@ -6,7 +11,10 @@ from agentevals.trajectory.llm import (
 )
 from langsmith import Client
 
-from app.agents.team import order_agent
+from app.team import order_agent_builder, compile_agent
+
+# Initialize agent for testing with InMemorySaver
+order_agent = compile_agent(order_agent_builder, InMemorySaver())
 
 client = Client()
 
