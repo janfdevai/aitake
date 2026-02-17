@@ -12,6 +12,4 @@ RUN uv sync
 
 # Expose the port (Cloud Run sets this dynamically)
 EXPOSE 8080
-
-# Run the FastMCP server
-CMD ["uv", "run", "fastapi", "run", "app/main.py", "--host", "[IP_ADDRESS]", "--port", "8080", "--reload"]
+CMD ["uv", "run", "fastapi", "run", "app/main.py", "--host", "0.0.0.0", "--port", "8080"]
