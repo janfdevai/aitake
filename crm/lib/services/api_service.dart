@@ -6,7 +6,10 @@ import '../models/models.dart';
 class ApiService {
   final supabase = Supabase.instance.client;
   // TODO: Move to environment config
-  static const String channelsApiUrl = 'http://localhost:8002';
+  static const String channelsApiUrl = String.fromEnvironment(
+    'CHANNELS_API_URL',
+    defaultValue: 'http://localhost:8002',
+  );
 
   // --- AUTH & MANAGER ---
   Future<void> login(String email, String password) async {

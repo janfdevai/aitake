@@ -25,7 +25,11 @@ jobs:
 
       - name: Build Web
         working-directory: crm
-        run: flutter build web --release
+        run: |
+          flutter build web --release \
+            --dart-define=CHANNELS_API_URL="${{ vars.CHANNELS_API_URL }}" \
+            --dart-define=SUPABASE_URL="${{ vars.SUPABASE_URL }}" \
+            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0

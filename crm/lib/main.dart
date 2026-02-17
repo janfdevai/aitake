@@ -8,8 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Supabase.initialize(
-    url: 'https://kxwwlqoybtoocijtqsfg.supabase.co',
-    anonKey: 'sb_publishable_bQOnn5kxiEgY142f7_TfuQ_J3adZltl',
+    url: const String.fromEnvironment('SUPABASE_URL'),
+    anonKey: const String.fromEnvironment('SUPABASE_ANON_KEY'),
   );
 
   runApp(const ProviderScope(child: MainApp()));
