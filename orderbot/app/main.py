@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from contextlib import asynccontextmanager
 import os
+import logging
 from dotenv import load_dotenv
 from psycopg_pool import AsyncConnectionPool
 from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
@@ -11,13 +12,22 @@ load_dotenv(override=True)
 from app.schemas import MessageRequest, ChatResponse
 from app.schemas import MessageRequest, ChatResponse
 
-@asynccontextmanager
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Initialize Postgres connection pool
+    db_url = os.getenv("DATABASE_URL", os.getenv("SUPABASE_URL"))
+    
+    if not db_url:
+        logger.error("DATABASE_URL or SUPABASE_URL is not set. Application cannot start.")
+        raise ValueError("DATABASE_URL or SUPABASE_URL is not set.")
+        
     async with AsyncConnectionPool(
         # Use DATABASE_URL or fallback to SUPABASE_URL if formatted correctly for postgres
-        conninfo=os.getenv("DATABASE_URL", os.getenv("SUPABASE_URL")),
+        conninfo=db_url,
         max_size=20,
         kwargs={"autocommit": True}
     ) as pool:
