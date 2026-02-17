@@ -14,4 +14,4 @@ RUN uv sync
 EXPOSE 8080
 
 # Run the FastMCP server
-CMD ["uv", "run", "app/main.py"]
+CMD ["uv", "run", "fastapi", "run", "app/main.py", "--host", "[IP_ADDRESS]", "--port", "8080", "--reload"]
