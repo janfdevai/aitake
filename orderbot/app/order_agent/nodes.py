@@ -5,7 +5,7 @@ from langgraph.prebuilt import ToolNode
 from app.order_agent.state import MessagesState
 from app.order_agent.tools import tools
 
-model = ChatGoogleGenerativeAI(model="gemini-3-flash-preview", temperature=0)
+model = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite", temperature=0)
 model_with_tools = model.bind_tools(tools)
 
 
