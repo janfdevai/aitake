@@ -1,13 +1,14 @@
-from fastapi import FastAPI, HTTPException
-from contextlib import asynccontextmanager
 import os
 import logging
 from dotenv import load_dotenv
+
+load_dotenv(override=True)
+
+from fastapi import FastAPI, HTTPException, Request as FastAPIRequest
+from contextlib import asynccontextmanager
 from psycopg_pool import AsyncConnectionPool
 from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from app.team import order_agent_builder, compile_agent
-
-load_dotenv(override=True)
 
 from app.schemas import MessageRequest, ChatResponse
 from app.schemas import MessageRequest, ChatResponse
@@ -46,25 +47,25 @@ async def root():
     return {"message": "OrderBot API is running"}
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request: MessageRequest):
+async def chat(request_data: MessageRequest, request: FastAPIRequest):
     try:
         # Prepare the input for the agent
         # The agent expects {"messages": [...], "user": {...}} in state
         user_state = {
-            "phone_number": request.user.phone_number,
-            "business_phone_number": request.user.business_phone_number,
+            "phone_number": request_data.user.phone_number,
+            "business_phone_number": request_data.user.business_phone_number,
         }
-        if request.user.name is not None:
-            user_state["name"] = request.user.name
-        if request.user.items:
-            user_state["items"] = request.user.items
+        if request_data.user.name is not None:
+            user_state["name"] = request_data.user.name
+        if request_data.user.items:
+            user_state["items"] = request_data.user.items
 
         input_state = {
-            "messages": [{"role": "user", "content": request.message}],
+            "messages": [{"role": "user", "content": request_data.message}],
             "user": user_state
         }
         
-        config = {"configurable": {"thread_id": request.thread_id}}
+        config = {"configurable": {"thread_id": request_data.thread_id}}
         
         # Invoke the agent
         result = await request.app.state.order_agent.ainvoke(input_state, config)
