@@ -22,19 +22,19 @@ def verify_subscription(subscription: Subscription):
         return Response(content=subscription.challenge)
 
 
-async def process_message_answer(response_text: str, image_path: str, from_number: str):
+async def process_message_answer(response_text: str, image_path: str, from_number: str, phone_number_id: str):
     # 2. Send the message
     if image_path:
         # Note: 'upload_media' might essentially duplicate 'image_path' handling if it expects a local file.
         # Orderbot API returns a path. If both services are local, this works.
         # Ideally, Orderbot API should return a URL or signed URL.
         # Assuming shared volume or local execution for now. 
-        image_uploaded = await upload_media(image_path)
+        image_uploaded = await upload_media(image_path, phone_number_id=phone_number_id)
         print("IMAGE UPLOADED: ", image_uploaded)
         media_id = image_uploaded.get("id")
-        await send_whatsapp_image_message(from_number, response_text, media_id)
+        await send_whatsapp_image_message(from_number, response_text, media_id, phone_number_id=phone_number_id)
     else:
-        await send_whatsapp_text_message(from_number, response_text)
+        await send_whatsapp_text_message(from_number, response_text, phone_number_id=phone_number_id)
 
 
 from .supabase_client import supabase
@@ -51,7 +51,7 @@ async def save_message(conversation_id: str, content: str, sender_type: str):
         print(f"Error saving message to Supabase: {e}")
 
 
-async def run_agent_and_send_reply(message_content: str, from_number: str, business_number: str, client_wa_id: str, client_name: str, conversation_id: Optional[str] = None):
+async def run_agent_and_send_reply(message_content: str, from_number: str, business_number: str, client_wa_id: str, client_name: str, conversation_id: Optional[str] = None, phone_number_id: Optional[str] = None):
     try:
         # Prepare payload for OrderBot API
         payload = {
@@ -82,7 +82,7 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
             if conversation_id and response_text:
                 await save_message(conversation_id, response_text, "bot")
             
-            await process_message_answer(response_text, image_path, from_number)
+            await process_message_answer(response_text, image_path, from_number, phone_number_id)
 
     except Exception as e:
         with open("debug_log.txt", "a") as f:
@@ -92,7 +92,7 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
         if conversation_id:
             await save_message(conversation_id, error_msg, "bot")
         await send_whatsapp_text_message(
-            from_number, error_msg
+            from_number, error_msg, phone_number_id=phone_number_id
         )
 
 
@@ -137,6 +137,7 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
                     f.write(f"Business query result: {b_query.data}\n")
                 if b_query.data:
                     business_uuid = b_query.data[0].get("business_id")
+                    whatsapp_phone_number_id = b_query.data[0].get("whatsapp_phone_number_id")
                 
                 if business_uuid:
                     # Resolve/Create Client
@@ -176,10 +177,13 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
 
             message = entry["messages"][0]
             message_id = message.get("id")
-            from_number = remove_extra_one(message["from"])
-            
             # Mark as read
-            await mark_message_as_read(message_id)
+            # Determine phone_number_id from entry metadata if possible, but for now using the one from DB or None
+            # Actually entry metadata has id
+            payload_phone_number_id = entry["metadata"].get("phone_number_id")
+            resolved_phone_number_id = whatsapp_phone_number_id if 'whatsapp_phone_number_id' in locals() and whatsapp_phone_number_id else payload_phone_number_id
+            
+            await mark_message_as_read(message_id, phone_number_id=resolved_phone_number_id)
             
             # Process message content
             message_content = await process_message_type(message)
@@ -200,7 +204,8 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
                 business_phone,
                 client_wa_id,
                 client_name,
-                conversation_id
+                conversation_id,
+                resolved_phone_number_id
             )
         return {"status": "accepted"}
     except Exception as e:

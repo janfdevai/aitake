@@ -240,4 +240,51 @@ class ApiService {
         .order('created_at', ascending: true)
         .map((data) => data.map((item) => Message.fromJson(item)).toList());
   }
+
+  // --- WHATSAPP ONBOARDING ---
+  Future<String> registerWhatsApp(
+    String phoneNumber,
+    String displayName,
+  ) async {
+    final uri = Uri.parse('$channelsApiUrl/whatsapp/onboard/start');
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'phone_number': phoneNumber,
+        'display_name': displayName,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['phone_number_id'];
+    } else {
+      throw Exception('Failed to start onboarding: ${response.body}');
+    }
+  }
+
+  Future<void> verifyWhatsApp(
+    String phoneNumberId,
+    String code,
+    String businessId,
+  ) async {
+    // 1. Verify with Channels API
+    final uri = Uri.parse('$channelsApiUrl/whatsapp/onboard/verify');
+    final response = await http.post(
+      uri,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'phone_number_id': phoneNumberId, 'code': code}),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to verify code: ${response.body}');
+    }
+
+    // 2. Update Business in Supabase
+    await supabase
+        .from('businesses')
+        .update({'whatsapp_phone_number_id': phoneNumberId})
+        .eq('business_id', businessId);
+  }
 }

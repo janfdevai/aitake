@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/providers.dart';
 import '../theme/app_theme.dart';
+import 'whatsapp_verification_screen.dart';
 
 class RegisterBusinessScreen extends ConsumerStatefulWidget {
   const RegisterBusinessScreen({super.key});
@@ -227,19 +228,21 @@ class _RegisterBusinessScreenState
         'whatsapp_phone_number': _phoneController.text.trim(),
       };
 
-      await apiService.createBusiness(
+      final business = await apiService.createBusiness(
         businessData,
         managerId: manager.managerId,
       );
 
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Registration successful! Please login.'),
-            backgroundColor: AppTheme.successColor,
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => WhatsAppVerificationScreen(
+              businessId: business.businessId,
+              phoneNumber: _phoneController.text.trim(),
+              businessName: _nameController.text.trim(),
+            ),
           ),
         );
-        Navigator.pop(context);
       }
     } catch (e) {
       if (mounted) {
