@@ -40,6 +40,7 @@ class Business {
   final String businessId;
   final String name;
   final String? whatsappPhoneNumber;
+  final String? whatsappPhoneNumberId;
   final String? address;
   final String? logoUrl;
   final bool isActive;
@@ -50,6 +51,7 @@ class Business {
     required this.businessId,
     required this.name,
     this.whatsappPhoneNumber,
+    this.whatsappPhoneNumberId,
     this.address,
     this.logoUrl,
     this.isActive = true,
@@ -60,6 +62,7 @@ class Business {
       businessId: json['business_id'],
       name: json['name'],
       whatsappPhoneNumber: json['whatsapp_phone_number'],
+      whatsappPhoneNumberId: json['whatsapp_phone_number_id'],
       address: json['address'],
       logoUrl: json['logo_url'],
       isActive: json['is_active'] ?? true,
@@ -70,6 +73,7 @@ class Business {
     'business_id': businessId,
     'name': name,
     'whatsapp_phone_number': whatsappPhoneNumber,
+    'whatsapp_phone_number_id': whatsappPhoneNumberId,
     'address': address,
     'logo_url': logoUrl,
     'is_active': isActive,

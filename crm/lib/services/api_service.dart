@@ -188,6 +188,7 @@ class ApiService {
     String content,
     SenderType senderType, {
     String? phoneNumber,
+    String? businessPhoneNumberId,
   }) async {
     // 1. Insert into Supabase
     final response = await supabase
@@ -207,7 +208,12 @@ class ApiService {
         final apiResponse = await http.post(
           uri,
           headers: {'Content-Type': 'application/json'},
-          body: jsonEncode({'phone_number': phoneNumber, 'content': content}),
+          body: jsonEncode({
+            'phone_number': phoneNumber,
+            'content': content,
+            if (businessPhoneNumberId != null)
+              'business_phone_number_id': businessPhoneNumberId,
+          }),
         );
 
         if (apiResponse.statusCode != 200) {

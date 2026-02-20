@@ -13528,3 +13528,261 @@ Phone: 523317603281, Content: tu pedido esta listo, ID: None
 Error sending text message to 523317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/977185725470027/messages'
 For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
 Response: {"error":{"message":"Unsupported post request. Object with ID '977185725470027' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AyahcCWKJ37BU7TbqZpCqBV"}}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- Manual Send Request ---
+Phone: 523317603281, Content: listo, ID: None
+Error sending text message to 523317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/977185725470027/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '977185725470027' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AslhDNNtFzmYBtQW1TAB_Xv"}}
+
+--- Manual Send Request ---
+Phone: 523317603281, Content: listo, ID: None
+Error sending text message to 523317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/977185725470027/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '977185725470027' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"Acxi38n2AllWWlq429xlbVo"}}
+
+--- Manual Send Request ---
+Phone: 523317603281, Content: listo, ID: None
+Error sending text message to 523317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/977185725470027/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '977185725470027' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AEe4CnOMSXKMO8IGVwz9sQM"}}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- Manual Send Request ---
+Phone: 523317603281, Content: listo, ID: 1022538604275579
+Message sent successfully to 523317603281: {"messaging_product":"whatsapp","contacts":[{"input":"523317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjBBNjZGMTg1QUY1MUJFRkFBMAA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjBBNjZGMTg1QUY1MUJFRkFBMAA=",
+                "status": "sent",
+                "timestamp": "1771626841",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjBBNjZGMTg1QUY1MUJFRkFBMAA=",
+                "status": "delivered",
+                "timestamp": "1771626841",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjBBNjZGMTg1QUY1MUJFRkFBMAA=",
+                "status": "read",
+                "timestamp": "1771626859",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDOEVBMkUxRDRFNEUxMDVENTJFODk0NkFDMThCODZCAA==",
+                "timestamp": "1771626863",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: Hola, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hola", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkM5RUJENDIyMjNBN0RBRTZEOAA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkM5RUJENDIyMjNBN0RBRTZEOAA=",
+                "status": "sent",
+                "timestamp": "1771626868",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkM5RUJENDIyMjNBN0RBRTZEOAA=",
+                "status": "read",
+                "timestamp": "1771626868",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}

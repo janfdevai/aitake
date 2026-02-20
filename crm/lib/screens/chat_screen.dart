@@ -33,11 +33,24 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
     try {
       final apiService = ref.read(apiServiceProvider);
+
+      // Get the business to find the whatsapp_phone_number_id
+      final managerBusinesses =
+          ref.read(managerBusinessesProvider).valueOrNull ?? [];
+      final business = managerBusinesses.firstWhere(
+        (b) => b.id == widget.conversation.businessId,
+        orElse: () => Business(
+          businessId: widget.conversation.businessId,
+          name: 'Unknown',
+        ),
+      );
+
       await apiService.sendMessage(
         widget.conversation.conversationId,
         content,
         SenderType.business,
         phoneNumber: widget.conversation.clientWaId,
+        businessPhoneNumberId: business.whatsappPhoneNumberId,
       );
       ref.invalidate(messagesProvider(widget.conversation.conversationId));
       ref.invalidate(conversationsProvider(widget.conversation.businessId));
