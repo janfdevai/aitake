@@ -110,12 +110,12 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
 
         if "messages" in entry:
             print("ENTRY", entry)
-            business_phone = entry["metadata"]["display_phone_number"]
+            business_phone = remove_extra_one(entry["metadata"]["display_phone_number"])
 
             # Extract contact info
             contacts = entry.get("contacts", [])
             contact = contacts[0] if contacts else {}
-            client_wa_id = contact.get("wa_id")
+            client_wa_id = remove_extra_one(contact.get("wa_id"))
             client_name = contact.get("profile", {}).get("name", "Unknown")
 
             print(
