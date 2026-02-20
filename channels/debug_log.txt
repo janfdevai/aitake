@@ -10723,3 +10723,992 @@ Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Leng
 Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
 Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
 Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMkFGQkE3NjgwMkQyMkFCOUJDOEMzMTA5MUU1Q0U0AA==",
+                "timestamp": "1771546225",
+                "text": {
+                  "body": "Hol"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Business query result: []
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNDM0ODg3RUI1NDlENEE1QkNGRjY2REZDQUVGQjg1AA==",
+                "timestamp": "1771548045",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Business query result: []
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "870925425421677",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "941991139007423"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQzkyMEY1REM0MjFEMjhFMzlFMUNFNUZEMDJCRjRFAA==",
+                "timestamp": "1771549331",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Business query result: [{'business_id': '78815150-5767-49f0-9012-32fa674c0874', 'whatsapp_phone_number_id': '941991139007423'}]
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "870925425421677",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "941991139007423"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDRjNDODg0OENGMDkxQkVGRDQwNzJCMzAxMTA4RkRFAA==",
+                "timestamp": "1771549490",
+                "text": {
+                  "body": "Hy"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Business query result: [{'business_id': '78815150-5767-49f0-9012-32fa674c0874', 'whatsapp_phone_number_id': '941991139007423'}]
+Processed Message: Hy, From: 5213317603281, Business: 5213326321192
+Resolved business_uuid: 78815150-5767-49f0-9012-32fa674c0874, client_uuid: 380f50ca-43ea-4709-99ff-f5007e7b1b78, conversation_id: 241fc75c-8631-4097-b95b-18a82aa35e41
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hy", "thread_id": "5213317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "5213326321192", "name": "George", "items": []}}
+OrderBot status: 500
+Error in background task: Server error '500 Internal Server Error' for url 'http://localhost:8001/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkMxMTE3NjNEMDkxMjgyOEU0MQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "870925425421677",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "941991139007423"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkMxMTE3NjNEMDkxMjgyOEU0MQA=",
+                "status": "read",
+                "timestamp": "1771549496",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "870925425421677",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "941991139007423"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkMxMTE3NjNEMDkxMjgyOEU0MQA=",
+                "status": "sent",
+                "timestamp": "1771549496",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMEEyNTM0OTIwNUFFMkU5NzkwQkNCMkVDNkE3MzNDAA==",
+                "timestamp": "1771549589",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Business query result: []
+Processed Message: Hola, From: 5213317603281, Business: 15551775877
+Resolved business_uuid: None, client_uuid: None, conversation_id: None
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hola", "thread_id": "5213317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551775877", "name": "George", "items": []}}
+OrderBot status: 500
+Error in background task: Server error '500 Internal Server Error' for url 'http://localhost:8001/chat'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+Error sending text message to 5213317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/977185725470027/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"(#131030) Recipient phone number not in allowed list","type":"OAuthException","code":131030,"error_data":{"messaging_product":"whatsapp","details":"Recipient phone number not in allowed list: Add recipient phone number to recipient list and try again."},"fbtrace_id":"AuqEjAtI34TDbOyyrNjGtbd"}}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "858619027097387",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551775877",
+              "phone_number_id": "977185725470027"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNUQ5RTREMzBCODNCQjU5NTg5NjlDNjRGRTQwRjQ3AA==",
+                "timestamp": "1771549773",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}, {'business_id': '3e5758df-eaa2-4eed-92d9-16d19a0b7e1f', 'name': 'hams', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523317603281', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adds', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-18T19:18:25.653956+00:00', 'updated_at': '2026-02-18T19:18:25.653956+00:00'}, {'business_id': '2edf5d9d-6214-417b-8acb-9f60b0fa223c', 'name': 'hams', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523317603281', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adds', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-18T19:25:38.934267+00:00', 'updated_at': '2026-02-18T19:25:38.934267+00:00'}, {'business_id': 'aaf08654-59de-4b14-ae55-87c2700eb822', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adss', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T18:19:33.644813+00:00', 'updated_at': '2026-02-19T18:19:33.644813+00:00'}, {'business_id': '90b28878-76ab-4879-b85d-093479ca7788', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addd', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T18:27:44.441905+00:00', 'updated_at': '2026-02-19T18:27:44.441905+00:00'}, {'business_id': 'c2c4217e-e22c-4cdc-9e70-31c537f560a4', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myaddress', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T19:27:39.509117+00:00', 'updated_at': '2026-02-19T19:27:39.509117+00:00'}, {'business_id': '61c1b079-d333-496c-8650-e4bb6a165df0', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myaddress', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T19:35:19.357113+00:00', 'updated_at': '2026-02-19T19:35:19.357113+00:00'}, {'business_id': '415dae06-4779-4247-95ce-e2a38b0e25cc', 'name': 'devai', 'whatsapp_phone_number_id': '976201682248470', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'Myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T20:57:28.814801+00:00', 'updated_at': '2026-02-19T20:57:28.814801+00:00'}, {'business_id': 'fa7741d3-1d5c-4e78-88d3-1e042106fbe0', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T21:08:59.763043+00:00', 'updated_at': '2026-02-19T21:08:59.763043+00:00'}, {'business_id': 'bc112842-e7bc-42ec-a458-918d27158a02', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:40:01.792114+00:00', 'updated_at': '2026-02-19T22:40:01.792114+00:00'}, {'business_id': 'f21216db-3f51-45f8-a8f7-aa39d6bee5a3', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:47:21.254778+00:00', 'updated_at': '2026-02-19T22:47:21.254778+00:00'}, {'business_id': '78815150-5767-49f0-9012-32fa674c0874', 'name': 'devai', 'whatsapp_phone_number_id': '941991139007423', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:52:26.062932+00:00', 'updated_at': '2026-02-19T22:52:26.062932+00:00'}]
+Business query result: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba'}, {'business_id': '90b28878-76ab-4879-b85d-093479ca7788'}]
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "870925425421677",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "941991139007423"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQkMwMTlGMDdGN0VCRjk2RkY5OTI3NzJDQzI1QzY3AA==",
+                "timestamp": "1771549900",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}, {'business_id': '3e5758df-eaa2-4eed-92d9-16d19a0b7e1f', 'name': 'hams', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523317603281', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adds', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-18T19:18:25.653956+00:00', 'updated_at': '2026-02-18T19:18:25.653956+00:00'}, {'business_id': '2edf5d9d-6214-417b-8acb-9f60b0fa223c', 'name': 'hams', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523317603281', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adds', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-18T19:25:38.934267+00:00', 'updated_at': '2026-02-18T19:25:38.934267+00:00'}, {'business_id': 'aaf08654-59de-4b14-ae55-87c2700eb822', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adss', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T18:19:33.644813+00:00', 'updated_at': '2026-02-19T18:19:33.644813+00:00'}, {'business_id': '90b28878-76ab-4879-b85d-093479ca7788', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addd', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T18:27:44.441905+00:00', 'updated_at': '2026-02-19T18:27:44.441905+00:00'}, {'business_id': 'c2c4217e-e22c-4cdc-9e70-31c537f560a4', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myaddress', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T19:27:39.509117+00:00', 'updated_at': '2026-02-19T19:27:39.509117+00:00'}, {'business_id': '61c1b079-d333-496c-8650-e4bb6a165df0', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myaddress', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T19:35:19.357113+00:00', 'updated_at': '2026-02-19T19:35:19.357113+00:00'}, {'business_id': '415dae06-4779-4247-95ce-e2a38b0e25cc', 'name': 'devai', 'whatsapp_phone_number_id': '976201682248470', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'Myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T20:57:28.814801+00:00', 'updated_at': '2026-02-19T20:57:28.814801+00:00'}, {'business_id': 'fa7741d3-1d5c-4e78-88d3-1e042106fbe0', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T21:08:59.763043+00:00', 'updated_at': '2026-02-19T21:08:59.763043+00:00'}, {'business_id': 'bc112842-e7bc-42ec-a458-918d27158a02', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:40:01.792114+00:00', 'updated_at': '2026-02-19T22:40:01.792114+00:00'}, {'business_id': 'f21216db-3f51-45f8-a8f7-aa39d6bee5a3', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:47:21.254778+00:00', 'updated_at': '2026-02-19T22:47:21.254778+00:00'}, {'business_id': '78815150-5767-49f0-9012-32fa674c0874', 'name': 'devai', 'whatsapp_phone_number_id': '941991139007423', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:52:26.062932+00:00', 'updated_at': '2026-02-19T22:52:26.062932+00:00'}]
+Business query result: []
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "870925425421677",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "941991139007423"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNzAwNDZDMzIzOTNDMDk5ODUxQTNCNzcwNjg5NTAyAA==",
+                "timestamp": "1771549940",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': 'aeffb628-a32f-4ac8-9db5-80e30783acba', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-16T17:47:11.919102+00:00', 'updated_at': '2026-02-16T17:47:11.919102+00:00'}, {'business_id': '3e5758df-eaa2-4eed-92d9-16d19a0b7e1f', 'name': 'hams', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523317603281', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adds', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-18T19:18:25.653956+00:00', 'updated_at': '2026-02-18T19:18:25.653956+00:00'}, {'business_id': '2edf5d9d-6214-417b-8acb-9f60b0fa223c', 'name': 'hams', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523317603281', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adds', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-18T19:25:38.934267+00:00', 'updated_at': '2026-02-18T19:25:38.934267+00:00'}, {'business_id': 'aaf08654-59de-4b14-ae55-87c2700eb822', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'adss', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T18:19:33.644813+00:00', 'updated_at': '2026-02-19T18:19:33.644813+00:00'}, {'business_id': '90b28878-76ab-4879-b85d-093479ca7788', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '15551775877', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'addd', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T18:27:44.441905+00:00', 'updated_at': '2026-02-19T18:27:44.441905+00:00'}, {'business_id': 'c2c4217e-e22c-4cdc-9e70-31c537f560a4', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myaddress', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T19:27:39.509117+00:00', 'updated_at': '2026-02-19T19:27:39.509117+00:00'}, {'business_id': '61c1b079-d333-496c-8650-e4bb6a165df0', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myaddress', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T19:35:19.357113+00:00', 'updated_at': '2026-02-19T19:35:19.357113+00:00'}, {'business_id': '415dae06-4779-4247-95ce-e2a38b0e25cc', 'name': 'devai', 'whatsapp_phone_number_id': '976201682248470', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'Myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T20:57:28.814801+00:00', 'updated_at': '2026-02-19T20:57:28.814801+00:00'}, {'business_id': 'fa7741d3-1d5c-4e78-88d3-1e042106fbe0', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T21:08:59.763043+00:00', 'updated_at': '2026-02-19T21:08:59.763043+00:00'}, {'business_id': 'bc112842-e7bc-42ec-a458-918d27158a02', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:40:01.792114+00:00', 'updated_at': '2026-02-19T22:40:01.792114+00:00'}, {'business_id': 'f21216db-3f51-45f8-a8f7-aa39d6bee5a3', 'name': 'devai', 'whatsapp_phone_number_id': None, 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:47:21.254778+00:00', 'updated_at': '2026-02-19T22:47:21.254778+00:00'}, {'business_id': '78815150-5767-49f0-9012-32fa674c0874', 'name': 'devai', 'whatsapp_phone_number_id': '941991139007423', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-19T22:52:26.062932+00:00', 'updated_at': '2026-02-19T22:52:26.062932+00:00'}]
+Business query result: []
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1209470364632437",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551884893",
+              "phone_number_id": "1026586453868330"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDRjc2QTMzOTU4RjkyNDhFMTZGMTZEOEY1OEM4Rjk0AA==",
+                "timestamp": "1771559456",
+                "text": {
+                  "body": "Hi"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: []
+Business query result: []
+Error marking message as read: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/1026586453868330/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '1026586453868330' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AXs-RawngmpYx46QBBxXZzD"}}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1209470364632437",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551884893",
+              "phone_number_id": "1026586453868330"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQUUzOEY3RDBCQ0FCMUJGMkEwODhERjgwNTlBM0ZDAA==",
+                "timestamp": "1771559483",
+                "text": {
+                  "body": "Hi"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: []
+Business query result: []
+Error marking message as read: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/1026586453868330/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '1026586453868330' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AjV5ivV9zUaZ5Pfd1cjo1Sl"}}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15558601410",
+              "phone_number_id": "937663829439558"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQkJCNDREQUU4RDc1MDA1QzUxOTg5RDdERjU0NEE0AA==",
+                "timestamp": "1771559836",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: []
+Business query result: []
+Error marking message as read: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/937663829439558/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '937663829439558' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"A2lAeW_JR8QgPD2EC_NN__P"}}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15558601410",
+              "phone_number_id": "937663829439558"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNTIwQ0MzODVEOEE2RTIxQjYwRDM4ODQ1NzA0QkQ0AA==",
+                "timestamp": "1771559776",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: []
+Business query result: []
+Error marking message as read: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/937663829439558/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"Unsupported post request. Object with ID '937663829439558' does not exist, cannot be loaded due to missing permissions, or does not support this operation. Please read the Graph API documentation at https:\/\/developers.facebook.com\/docs\/graph-api","type":"GraphMethodException","code":100,"error_subcode":33,"fbtrace_id":"AO69jSIHrDGqXJ9ZFos8QVd"}}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1209470364632437",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551884893",
+              "phone_number_id": "1026586453868330"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDRkQ2OUZFOUE5M0UxMDY0RDEyREJFQjZGRTE2M0U3AA==",
+                "timestamp": "1771560269",
+                "text": {
+                  "body": "Hol"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "WhatsApp Business"
+                },
+                "wa_id": "16465894168"
+              }
+            ],
+            "messages": [
+              {
+                "from": "16465894168",
+                "id": "wamid.HBgLMTY0NjU4OTQxNjgVAgASGBIyNDJCQ0FDN0YxQjY1NTRCOEQA",
+                "timestamp": "1771560217",
+                "text": {
+                  "body": "*Continue setting up your account*\n\nYou have a few steps left to get started with WhatsApp Business. Get detailed instructions and track progress for your number +52 1 33 2632 1192 in *WhatsApp Manager's* new *Setup guidance*.\n\nGo to your *Setup guidance* on *desktop*: https://business.facebook.com/latest/whatsapp%5Fmanager/setup%5Fguidance?nav%5Fref=nudge&business%5Fid=892036710204661&lang=en_US&asset%5Fid=1606736826990749&phone%5Fnumber%5Fid=1022538604275579"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1209470364632437",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551884893",
+              "phone_number_id": "1026586453868330"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDREE1MEEyMzAwM0NEQTQ0OTcwQzhGOTQ0NEQzRTg2AA==",
+                "timestamp": "1771560456",
+                "text": {
+                  "body": "Hi"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1209470364632437",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551884893",
+              "phone_number_id": "1026586453868330"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNjZFQjdGQkNGMzA1RjY3NDNBRDM5RDdEOTE1MTgyAA==",
+                "timestamp": "1771560488",
+                "text": {
+                  "body": "Hi"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1209470364632437",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15551884893",
+              "phone_number_id": "1026586453868330"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMEY4NTZFMkI5NzBFNUJCRjg4RThDRDgzNENGQThGAA==",
+                "timestamp": "1771560657",
+                "text": {
+                  "body": "Hi"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Processed Message: Hi, From: 5213317603281, Business: 15551884893
+Resolved business_uuid: None, client_uuid: None, conversation_id: None
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hi", "thread_id": "5213317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "15551884893", "name": "George", "items": []}}
+OrderBot status: 200
+Error sending text message to 5213317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/1026586453868330/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"(#131030) Recipient phone number not in allowed list","type":"OAuthException","code":131030,"error_data":{"messaging_product":"whatsapp","details":"Recipient phone number not in allowed list: Add recipient phone number to recipient list and try again."},"fbtrace_id":"AtDUQqfb4UDP8LzygFUD8l-"}}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMTMxODE0MDc1QzE1MUUwQUE3Q0NFMTQ4ODhBMEYxAA==",
+                "timestamp": "1771560699",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Processed Message: Hola, From: 5213317603281, Business: 5213326321192
+Resolved business_uuid: None, client_uuid: None, conversation_id: None
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hola", "thread_id": "5213317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "5213326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjczNUEyMkRBRTU0MEU4RjY5MQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjczNUEyMkRBRTU0MEU4RjY5MQA=",
+                "status": "sent",
+                "timestamp": "1771560707",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjczNUEyMkRBRTU0MEU4RjY5MQA=",
+                "status": "read",
+                "timestamp": "1771560707",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
