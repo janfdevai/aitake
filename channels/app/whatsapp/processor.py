@@ -132,7 +132,7 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
                 all_b = supabase.table("businesses").select("*").execute()
                 with open("debug_log.txt", "a") as f:
                     f.write(f"All businesses in DB: {all_b.data}\n")
-                b_query = supabase.table("businesses").select("business_id").eq("whatsapp_phone_number", business_phone).execute()
+                b_query = supabase.table("businesses").select("business_id, whatsapp_phone_number_id").eq("whatsapp_phone_number", business_phone).execute()
                 with open("debug_log.txt", "a") as f:
                     f.write(f"Business query result: {b_query.data}\n")
                 if b_query.data:

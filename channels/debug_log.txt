@@ -11712,3 +11712,248 @@ Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","con
     }
   ]
 }
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQjEwMzM0QzMzRDM0RDhBRjYyNkQ2MjdENDNGNzE2AA==",
+                "timestamp": "1771561405",
+                "text": {
+                  "body": "Helloooo"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Processed Message: Helloooo, From: 5213317603281, Business: 5213326321192
+Resolved business_uuid: None, client_uuid: None, conversation_id: None
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Helloooo", "thread_id": "5213317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "5213326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjgxREJBMDk5MzYxRjRCRDc4MgA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjgxREJBMDk5MzYxRjRCRDc4MgA=",
+                "status": "read",
+                "timestamp": "1771561410",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjgxREJBMDk5MzYxRjRCRDc4MgA=",
+                "status": "sent",
+                "timestamp": "1771561410",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNDhBOTEzNjVFRUYzRkFFMTJFQzhGMUYzNTUzNEQyAA==",
+                "timestamp": "1771561466",
+                "text": {
+                  "body": "Hi"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '335b105b-2feb-4fcf-ad24-50242ca8f9bb', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T04:02:47.46666+00:00', 'updated_at': '2026-02-20T04:02:47.46666+00:00'}]
+Business query result: []
+Processed Message: Hi, From: 5213317603281, Business: 5213326321192
+Resolved business_uuid: None, client_uuid: None, conversation_id: None
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hi", "thread_id": "5213317603281", "user": {"phone_number": "5213317603281", "business_phone_number": "5213326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjEzQzZCNTEyNTI0RjJBNjA0MAA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjEzQzZCNTEyNTI0RjJBNjA0MAA=",
+                "status": "read",
+                "timestamp": "1771561471",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjEzQzZCNTEyNTI0RjJBNjA0MAA=",
+                "status": "sent",
+                "timestamp": "1771561470",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
