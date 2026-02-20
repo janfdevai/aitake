@@ -1,9 +1,9 @@
+import sys
+sys.path.append('.')
 import asyncio
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
-
-from langgraph.checkpoint.memory import InMemorySaver
 
 from agentevals.trajectory.llm import (
     TRAJECTORY_ACCURACY_PROMPT,
@@ -11,10 +11,7 @@ from agentevals.trajectory.llm import (
 )
 from langsmith import Client
 
-from app.team import order_agent_builder, compile_agent
-
-# Initialize agent for testing with InMemorySaver
-order_agent = compile_agent(order_agent_builder, InMemorySaver())
+from app.order_agent.agent import orderbot_agent
 
 client = Client()
 
@@ -26,21 +23,37 @@ trajectory_evaluator = create_trajectory_llm_as_judge(
 
 async def run_agent(inputs):
     """Your agent function that returns trajectory messages."""
-    # print(f"DEBUG INPUTS: {inputs}")
     print("\ntesting..", end="")
 
-    # Define the config required by the checkpointer
-    config = {"configurable": {"thread_id": "eval-session"}}
+    # Our new ADK agent doesn't take raw "inputs" state dictionaries.
+    # We must adapt the LangSmith dataset inputs to our process_message signature.
+    # We assume 'inputs' is a dict matching the older structure.
+    
+    # Extract message from the LangGraph input structure
+    messages_in_dataset = inputs.get("messages", [])
+    if isinstance(messages_in_dataset, list) and len(messages_in_dataset) > 0:
+        latest_message = messages_in_dataset[-1].get("content", "") if isinstance(messages_in_dataset[-1], dict) else getattr(messages_in_dataset[-1], "content", "")
+    else:
+        latest_message = str(messages_in_dataset)
+        
+    user_data = inputs.get("user", {})
+    phone_number = user_data.get("phone_number", "test_user")
+    business_phone = user_data.get("business_phone_number", "test_business")
+    name = user_data.get("name", "Test User")
 
-    # Pass config as the second argument to invoke
-    outputs = await order_agent.ainvoke(
-        inputs,
-        config=config,
+    # Run the agent
+    response_text = orderbot_agent.process_message(
+        message=latest_message,
+        user_phone=phone_number,
+        business_phone=business_phone,
+        name=name
     )
 
-    # print(f"DEBUG OUTPUTS: {outputs}")
-
-    return outputs
+    # To satisfy LangSmith evaluate, we need to return an output format it understands.
+    # The trajectory evaluator typically expects to see a history of messages.
+    # Since our ADK wrapper doesn't currently easily yield the whole trajectory (internal to ADK Chat),
+    # we return the final assistant message for standard evaluators.
+    return {"messages": [{"role": "assistant", "content": response_text}]}
 
 
 async def main():
@@ -48,7 +61,5 @@ async def main():
         run_agent, data="whatsapp-ai-chatbot", evaluators=[trajectory_evaluator]
     )
 
-
-asyncio.run(main())
-
-# uv run python -m app.agents.tests.test_order_agent
+if __name__ == "__main__":
+    asyncio.run(main())

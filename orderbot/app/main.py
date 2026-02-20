@@ -5,92 +5,34 @@ from dotenv import load_dotenv
 load_dotenv(override=True)
 
 from fastapi import FastAPI, HTTPException, Request as FastAPIRequest
-from contextlib import asynccontextmanager
-from psycopg_pool import AsyncConnectionPool
-from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
-from app.team import order_agent_builder, compile_agent
-
 from app.schemas import MessageRequest, ChatResponse
-from app.schemas import MessageRequest, ChatResponse
-
+from app.order_agent.agent import orderbot_agent
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Initialize Postgres connection pool
-    db_url = os.getenv("DATABASE_URL", os.getenv("SUPABASE_URL"))
-    
-    if not db_url:
-        logger.error("DATABASE_URL or SUPABASE_URL is not set. Application cannot start.")
-        raise ValueError("DATABASE_URL or SUPABASE_URL is not set.")
-        
-    async with AsyncConnectionPool(
-        # Use DATABASE_URL or fallback to SUPABASE_URL if formatted correctly for postgres
-        conninfo=db_url,
-        max_size=20,
-        kwargs={"autocommit": True}
-    ) as pool:
-        checkpointer = AsyncPostgresSaver(pool)
-        
-        # NOTE: you need to call .setup() the first time you're using your checkpointer
-        await checkpointer.setup()
-        
-        app.state.order_agent = compile_agent(order_agent_builder, checkpointer)
-        yield
-
-app = FastAPI(title="OrderBot API", lifespan=lifespan)
+app = FastAPI(title="OrderBot API")
 
 @app.get("/")
 async def root():
-    return {"message": "OrderBot API is running"}
+    return {"message": "OrderBot API is running with Google ADK"}
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request_data: MessageRequest, request: FastAPIRequest):
     try:
-        # Prepare the input for the agent
-        # The agent expects {"messages": [...], "user": {...}} in state
-        user_state = {
-            "phone_number": request_data.user.phone_number,
-            "business_phone_number": request_data.user.business_phone_number,
-        }
-        if request_data.user.name is not None:
-            user_state["name"] = request_data.user.name
-        if request_data.user.items:
-            user_state["items"] = request_data.user.items
-
-        input_state = {
-            "messages": [{"role": "user", "content": request_data.message}],
-            "user": user_state
-        }
+        user = request_data.user
+        response_text = orderbot_agent.process_message(
+            message=request_data.message,
+            user_phone=user.phone_number,
+            business_phone=user.business_phone_number,
+            name=user.name if user.name else "Unknown"
+        )
         
-        config = {"configurable": {"thread_id": request_data.thread_id}}
-        
-        # Invoke the agent
-        result = await request.app.state.order_agent.ainvoke(input_state, config)
-        
-        # Extract response
-        # The result state contains "messages", the last one should be the bot's reply
-        messages = result.get("messages", [])
-        if not messages:
-            return ChatResponse(message="No response from agent")
-            
-        last_message = messages[-1]
-        if isinstance(last_message.content, str):
-            response_text = last_message.content
-        elif isinstance(last_message.content, list) and len(last_message.content) > 0:
-            if isinstance(last_message.content[0], dict) and "text" in last_message.content[0]:
-                response_text = last_message.content[0]["text"]
-            else:
-                response_text = str(last_message.content[0])
-        else:
-            response_text = str(last_message.content)
-        print(response_text)
-        image_path = result.get("image_path")
         print(response_text)
         
-        return ChatResponse(message=response_text, image_path=image_path)
+        # We omitted image_path handling for now
+        return ChatResponse(message=response_text, image_path=None)
         
     except Exception as e:
+        logger.error(f"Error processing chat: {e}")
         raise HTTPException(status_code=500, detail=str(e))

@@ -13786,3 +13786,823 @@ Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","con
     }
   ]
 }
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDOTVCM0JFRUM1MEIyRUZDMUU5QjYyRkJDOTVCRkVDAA==",
+                "timestamp": "1771629022",
+                "text": {
+                  "body": "Hola"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: Hola, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Hola", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkI5MkEzMEFGQkMwNjk5QjEwMAA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkI5MkEzMEFGQkMwNjk5QjEwMAA=",
+                "status": "sent",
+                "timestamp": "1771629029",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkI5MkEzMEFGQkMwNjk5QjEwMAA=",
+                "status": "read",
+                "timestamp": "1771629030",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDQ0ExODM5RDZCQ0E1REE0RjE5OUQyQzVGMDk0NzRDAA==",
+                "timestamp": "1771629040",
+                "text": {
+                  "body": "Quiero hacer un pedido"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: Quiero hacer un pedido, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Quiero hacer un pedido", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkY2MjRGMzNDRUYxNTZDQTNFMQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkY2MjRGMzNDRUYxNTZDQTNFMQA=",
+                "status": "sent",
+                "timestamp": "1771629044",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkY2MjRGMzNDRUYxNTZDQTNFMQA=",
+                "status": "read",
+                "timestamp": "1771629045",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDOTJDMEVGRTVGRDdCMEQ0NDg0MTY4OTY2MDc4MDMwAA==",
+                "timestamp": "1771629050",
+                "text": {
+                  "body": "Que hay?"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: Que hay?, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Que hay?", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkU2NDc2M0UzRjNENDU0REM4NwA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkU2NDc2M0UzRjNENDU0REM4NwA=",
+                "status": "read",
+                "timestamp": "1771629057",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkU2NDc2M0UzRjNENDU0REM4NwA=",
+                "status": "sent",
+                "timestamp": "1771629057",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNUMyNTA2MkM2OTczMzQ0NzAyQzBDOEJBMDQxRUIyAA==",
+                "timestamp": "1771629076",
+                "text": {
+                  "body": "2 Furay and three California"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: 2 Furay and three California, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "2 Furay and three California", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjU0QThCMkIyRjA1RTE5NTQxOQA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjU0QThCMkIyRjA1RTE5NTQxOQA=",
+                "status": "read",
+                "timestamp": "1771629084",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjU0QThCMkIyRjA1RTE5NTQxOQA=",
+                "status": "sent",
+                "timestamp": "1771629084",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDNzRERDEwRjFCQTg2NzVFNjU2QUE5ODVGQURGMUIzAA==",
+                "timestamp": "1771629103",
+                "text": {
+                  "body": "Another California"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: Another California, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Another California", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkIyNDU0Rjg2OTQxMkVCM0U3RAA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkIyNDU0Rjg2OTQxMkVCM0U3RAA=",
+                "status": "sent",
+                "timestamp": "1771629109",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEkIyNDU0Rjg2OTQxMkVCM0U3RAA=",
+                "status": "read",
+                "timestamp": "1771629110",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDODI5NTU1RTdBN0E3OTZDMDEwMTkwRUY0NTZDNjIwAA==",
+                "timestamp": "1771629115",
+                "text": {
+                  "body": "No"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: No, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "No", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Error sending text message to 5213317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/1022538604275579/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"(#100) The parameter text['body'] is required.","type":"OAuthException","code":100,"fbtrace_id":"ALaFK2pcH9Nle9YCNYOLu7q"}}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDOUEzQkI3NjIyOTBCREQzNUMzNkY2M0RDRjlDMTI0AA==",
+                "timestamp": "1771629274",
+                "text": {
+                  "body": "No"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: No, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "No", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Message sent successfully to 5213317603281: {"messaging_product":"whatsapp","contacts":[{"input":"5213317603281","wa_id":"5213317603281"}],"messages":[{"id":"wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjY0RDI0MUIzMTRGRTdGOUIwMwA="}]}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjY0RDI0MUIzMTRGRTdGOUIwMwA=",
+                "status": "sent",
+                "timestamp": "1771629279",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "statuses": [
+              {
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABEYEjY0RDI0MUIzMTRGRTdGOUIwMwA=",
+                "status": "read",
+                "timestamp": "1771629279",
+                "recipient_id": "5213317603281",
+                "pricing": {
+                  "billable": false,
+                  "pricing_model": "PMP",
+                  "category": "service",
+                  "type": "free_customer_service"
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+--- New Request ---
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "1606736826990749",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "5213326321192",
+              "phone_number_id": "1022538604275579"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "George"
+                },
+                "wa_id": "5213317603281"
+              }
+            ],
+            "messages": [
+              {
+                "from": "5213317603281",
+                "id": "wamid.HBgNNTIxMzMxNzYwMzI4MRUCABIYIEFDMUQ0NEEwRUZDNjAxOEU4QzYwRTU0MEU3OTgzODY2AA==",
+                "timestamp": "1771629297",
+                "text": {
+                  "body": "Que hay"
+                },
+                "type": "text"
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+All businesses in DB: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'name': 'devai', 'whatsapp_phone_number_id': '1022538604275579', 'whatsapp_phone_number': '523326321192', 'whatsapp_access_token': None, 'whatsapp_verify_token': None, 'address': 'myadrs', 'logo_url': None, 'is_active': True, 'created_at': '2026-02-20T20:15:09.542008+00:00', 'updated_at': '2026-02-20T20:15:09.542008+00:00'}]
+Business query result: [{'business_id': '81c10b2e-a873-4165-a088-b82545ce0bd1', 'whatsapp_phone_number_id': '1022538604275579'}]
+Processed Message: Que hay, From: 5213317603281, Business: 523326321192
+Resolved business_uuid: 81c10b2e-a873-4165-a088-b82545ce0bd1, client_uuid: f0252502-24f8-42ef-a949-60fd92603f6f, conversation_id: 21e0f65e-77f5-494b-a6d3-b760a76e0360
+Calling OrderBot at http://localhost:8001/chat with payload: {"message": "Que hay", "thread_id": "5213317603281", "user": {"phone_number": "523317603281", "business_phone_number": "523326321192", "name": "George", "items": []}}
+OrderBot status: 200
+Error sending text message to 5213317603281: Client error '400 Bad Request' for url 'https://graph.facebook.com/v22.0/1022538604275579/messages'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Response: {"error":{"message":"(#100) The parameter text['body'] is required.","type":"OAuthException","code":100,"fbtrace_id":"AIOBeZRAW4eOYrXYGNWW167"}}
