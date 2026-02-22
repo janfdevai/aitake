@@ -18,7 +18,7 @@ from app.order_agent.tools import (
 
 class OrderbotADKAgent:
     def __init__(self):
-        self.model_name = "gemini-2.5-flash-lite"
+        self.model_name = "gemini-3-flash-preview"
         self._sessions: Dict[str, SessionState] = {}
         self._agents: Dict[str, Agent] = {}
         self._session_service = InMemorySessionService()
