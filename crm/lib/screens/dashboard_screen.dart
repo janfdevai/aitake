@@ -7,6 +7,7 @@ import 'orders_screen.dart';
 import 'menu_screen.dart';
 import 'login_screen.dart';
 import 'conversations_screen.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -52,6 +53,8 @@ class DashboardScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Overview', style: Theme.of(context).textTheme.displayLarge),
+            const SizedBox(height: 16),
+            _BusinessProfileCard(businessId: businessId),
             const SizedBox(height: 24),
             Row(
               children: [
@@ -237,6 +240,115 @@ class _QuickActionTile extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _BusinessProfileCard extends ConsumerWidget {
+  final String businessId;
+  const _BusinessProfileCard({required this.businessId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileAsync = ref.watch(whatsappProfileProvider(businessId));
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: Colors.grey.withValues(alpha: 0.1)),
+      ),
+      child: profileAsync.when(
+        data: (profile) {
+          if (profile == null) {
+            return const Text('WhatsApp not connected');
+          }
+          final String? photoUrl = profile['profile_picture_url'];
+
+          return Row(
+            children: [
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: photoUrl != null
+                    ? NetworkImage(photoUrl)
+                    : null,
+                child: photoUrl == null ? const Icon(Icons.business) : null,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'WhatsApp Business Profile',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      profile['about'] ?? 'No description',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () async {
+                  final ImagePicker picker = ImagePicker();
+                  final XFile? image = await picker.pickImage(
+                    source: ImageSource.gallery,
+                  );
+
+                  if (image != null) {
+                    try {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Uploading photo...')),
+                      );
+                      final bytes = await image.readAsBytes();
+
+                      final businesses = await ref.read(
+                        managerBusinessesProvider.future,
+                      );
+                      final business = businesses.firstWhere(
+                        (b) => b.id == businessId,
+                      );
+                      if (business.whatsappPhoneNumberId != null) {
+                        await ref
+                            .read(apiServiceProvider)
+                            .updateWhatsAppProfilePhoto(
+                              business.whatsappPhoneNumberId!,
+                              bytes.toList(),
+                              image.name,
+                            );
+                        ref.invalidate(whatsappProfileProvider(businessId));
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Photo updated successfully!'),
+                            ),
+                          );
+                        }
+                      }
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error updating photo: $e')),
+                        );
+                      }
+                    }
+                  }
+                },
+              ),
+            ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, st) => Text('Error: $e'),
       ),
     );
   }

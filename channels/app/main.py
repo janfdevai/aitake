@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.whatsapp import Subscription, process_request, verify_subscription, send_whatsapp_text_message
 from app.whatsapp.onboarding import register_phone_number, request_code, verify_code, register_number_with_pin
+from fastapi import UploadFile, File
+from app.whatsapp.profile import get_profile, update_profile_picture
 
 app = FastAPI()
 
@@ -94,3 +96,20 @@ async def send_message(payload: MessageRequest):
     from_number = remove_extra_one(payload.phone_number)
     await send_whatsapp_text_message(from_number, payload.content, phone_number_id=payload.business_phone_number_id)
     return {"status": "success"}
+
+@app.get("/whatsapp/{phone_number_id}/profile")
+async def fetch_whatsapp_profile(phone_number_id: str):
+    try:
+        profile_data = await get_profile(phone_number_id)
+        return {"status": "success", "data": profile_data}
+    except Exception as e:
+        return Response(status_code=400, content=str(e))
+
+@app.post("/whatsapp/{phone_number_id}/profile-photo")
+async def upload_whatsapp_profile_photo(phone_number_id: str, file: UploadFile = File(...)):
+    try:
+        file_bytes = await file.read()
+        result = await update_profile_picture(phone_number_id, file_bytes, file.content_type)
+        return result
+    except Exception as e:
+        return Response(status_code=400, content=str(e))

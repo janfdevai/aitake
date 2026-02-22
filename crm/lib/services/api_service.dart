@@ -293,4 +293,42 @@ class ApiService {
         .update({'whatsapp_phone_number_id': phoneNumberId})
         .eq('business_id', businessId);
   }
+
+  // --- WHATSAPP PROFILE ---
+  Future<Map<String, dynamic>> getWhatsAppProfile(String phoneNumberId) async {
+    final uri = Uri.parse('$channelsApiUrl/whatsapp/$phoneNumberId/profile');
+    final response = await http.get(uri);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['data'];
+    } else {
+      throw Exception('Failed to load profile: ${response.body}');
+    }
+  }
+
+  Future<void> updateWhatsAppProfilePhoto(
+    String phoneNumberId,
+    List<int> fileBytes,
+    String filename,
+  ) async {
+    final uri = Uri.parse(
+      '$channelsApiUrl/whatsapp/$phoneNumberId/profile-photo',
+    );
+    var request = http.MultipartRequest('POST', uri);
+
+    var multipartFile = http.MultipartFile.fromBytes(
+      'file',
+      fileBytes,
+      filename: filename,
+    );
+    request.files.add(multipartFile);
+
+    var streamedResponse = await request.send();
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update profile photo: ${response.body}');
+    }
+  }
 }

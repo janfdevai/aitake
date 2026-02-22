@@ -115,3 +115,20 @@ final messagesProvider = FutureProvider.family<List<Message>, String>((
   final apiService = ref.watch(apiServiceProvider);
   return apiService.getMessages(conversationId);
 });
+
+final whatsappProfileProvider =
+    FutureProvider.family<Map<String, dynamic>?, String>((
+      ref,
+      businessId,
+    ) async {
+      final businesses = await ref.watch(managerBusinessesProvider.future);
+      try {
+        final business = businesses.firstWhere((b) => b.id == businessId);
+        if (business.whatsappPhoneNumberId == null) return null;
+
+        final apiService = ref.watch(apiServiceProvider);
+        return apiService.getWhatsAppProfile(business.whatsappPhoneNumberId!);
+      } catch (e) {
+        return null;
+      }
+    });

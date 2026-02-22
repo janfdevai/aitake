@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "verified_name": "devai",
+      "code_verification_status": "VERIFIED",
+      "display_phone_number": "+52 1 33 2632 1192",
+      "quality_rating": "GREEN",
+      "platform_type": "CLOUD_API",
+      "throughput": {
+        "level": "STANDARD"
+      },
+      "webhook_configuration": {
+        "application": "https://channels-service-145911654421.us-central1.run.app/webhook"
+      },
+      "id": "1022538604275579"
+    },
+    {
+      "verified_name": "Aitake",
+      "code_verification_status": "VERIFIED",
+      "display_phone_number": "15558601410",
+      "quality_rating": "UNKNOWN",
+      "platform_type": "CLOUD_API",
+      "throughput": {
+        "level": "STANDARD"
+      },
+      "webhook_configuration": {
+        "application": "https://channels-service-145911654421.us-central1.run.app/webhook"
+      },
+      "id": "937663829439558"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "QVFIUzVHbFJrNkdnZA2RyNldaLTZAZAaG0tWHdPWnNKaW96Ni1DelhpLXQ4ZA093LWx6SndJLTRJSGRxTGljN1UzV3VLUW8ZD",
+      "after": "QVFIUzdQcnoyYnk0d3hPaEVfZAVJJNHk2ckFhaHVCbWVqUGpoc0U0R2hsdzVZATk5WZAHRXZA1YwTGpldW0zQ2IxdTJGNEwZD"
+    }
+  }
+}
