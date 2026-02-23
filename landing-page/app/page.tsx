@@ -25,10 +25,10 @@ export default function Home() {
             <Link href="#demo" className="hover:text-white transition-colors">Demo</Link>
           </div>
           <div className="flex gap-4 items-center">
-            <Link href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
               Log in
             </Link>
-            <Link href="/signup" className="hidden md:flex text-sm font-medium bg-white text-slate-950 px-5 py-2.5 rounded-full hover:bg-slate-200 transition-colors">
+            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="hidden md:flex text-sm font-medium bg-white text-slate-950 px-5 py-2.5 rounded-full hover:bg-slate-200 transition-colors">
               Get Started
             </Link>
           </div>
@@ -49,7 +49,7 @@ export default function Home() {
             Close deals while you sleep. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link href="/signup" className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform">
+            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform">
               Start Building Free <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="#demo" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium transition-colors">
@@ -161,7 +161,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 relative z-10">Ready to automate your sales?</h2>
               <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto relative z-10">Join forward-thinking businesses using AITake to scale customer support and ordering on WhatsApp.</p>
               <div className="flex justify-center relative z-10">
-                <Link href="/signup" className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2">
+                <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2">
                   Get Started for Free <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
