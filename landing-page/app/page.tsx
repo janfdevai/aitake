@@ -20,7 +20,7 @@ export default function Home() {
             <span className="text-xl font-bold tracking-tight">AITake</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
-            <Link href="#features" className="hover:text-white transition-colors">Features</Link>
+            <Link href="#features" className="hover:text-white transition-colors">Featuress</Link>
             <Link href="#how-it-works" className="hover:text-white transition-colors">How it Works</Link>
             <Link href="#demo" className="hover:text-white transition-colors">Demo</Link>
           </div>
