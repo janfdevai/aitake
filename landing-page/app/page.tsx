@@ -38,22 +38,23 @@ export default function Home() {
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative max-w-7xl mx-auto px-6 pt-32 pb-40 flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-indigo-300 mb-8 backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
-            AITake is now in Early Access
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 text-indigo-300 font-medium mb-8 backdrop-blur-sm border border-indigo-500/30">
+            <span className="flex h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
+            AITake is in Early Access — Help us build it!
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-4xl mb-8 leading-[1.1]">
             Automate Your Sales on <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">WhatsApp</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12 leading-relaxed">
-            Close deals while you sleep. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp.
+            Close deals while you sleep. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
+            <strong className="text-white font-medium mt-2 block">🌍 We are currently offering full, free access in exchange for your feedback!</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform">
-              Start Building Free <ArrowRight className="w-4 h-4" />
+            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)]">
+              Claim Free Access <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="#demo" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium transition-colors">
-              View Live Demo
+            <Link href="#how-it-works" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium transition-colors">
+              Learn More
             </Link>
           </div>
 
@@ -158,11 +159,11 @@ export default function Home() {
           <div className="max-w-5xl mx-auto px-6">
             <div className="rounded-3xl bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-white/10 p-12 md:p-20 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('/favicon.ico')] opacity-5 bg-center bg-repeat mix-blend-overlay"></div>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 relative z-10">Ready to automate your sales?</h2>
-              <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto relative z-10">Join forward-thinking businesses using AITake to scale customer support and ordering on WhatsApp.</p>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 relative z-10">Help us shape the future of sales.</h2>
+              <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto relative z-10">We are offering full, free access to our platform for early adopters who are willing to share their feedback and help us build the best WhatsApp CRM.</p>
               <div className="flex justify-center relative z-10">
-                <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2">
-                  Get Started for Free <ArrowRight className="w-5 h-5" />
+                <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+                  Claim Your Free Access <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>
