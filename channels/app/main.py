@@ -10,8 +10,24 @@ from app.whatsapp import Subscription, process_request, verify_subscription, sen
 from app.whatsapp.onboarding import register_phone_number, request_code, verify_code, register_number_with_pin
 from fastapi import UploadFile, File
 from app.whatsapp.profile import get_profile, update_profile_picture
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import HTTPException
+from app.whatsapp.supabase_client import supabase
 
 app = FastAPI()
+
+security = HTTPBearer()
+
+def verify_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    token = credentials.credentials
+    try:
+        # Pass the JWT token explicitly to verify it against Supabase
+        user_resp = supabase.auth.get_user(token)
+        if not user_resp or not user_resp.user:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        return user_resp.user
+    except Exception as e:
+        raise HTTPException(status_code=401, detail=f"Authentication failed: {str(e)}")
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,7 +69,7 @@ class OnboardStartRequest(BaseModel):
     display_name: str
 
 @app.post("/whatsapp/onboard/start")
-async def start_onboarding(payload: OnboardStartRequest):
+async def start_onboarding(payload: OnboardStartRequest, user=Depends(verify_user)):
     try:
         # 1. Get/Register Phone Number ID
         phone_number_id = await register_phone_number(payload.phone_number, payload.display_name)
@@ -70,7 +86,7 @@ class OnboardVerifyRequest(BaseModel):
     code: str
 
 @app.post("/whatsapp/onboard/verify")
-async def verify_onboarding(payload: OnboardVerifyRequest):
+async def verify_onboarding(payload: OnboardVerifyRequest, user=Depends(verify_user)):
     try:
         # 1. Verify OTP
         await verify_code(payload.phone_number_id, payload.code)
@@ -90,7 +106,7 @@ class MessageRequest(BaseModel):
     business_phone_number_id: str = None
 
 @app.post("/send-message")
-async def send_message(payload: MessageRequest):
+async def send_message(payload: MessageRequest, user=Depends(verify_user)):
     with open("debug_log.txt", "a") as f:
         f.write(f"\n--- Manual Send Request ---\nPhone: {payload.phone_number}, Content: {payload.content}, ID: {payload.business_phone_number_id}\n")
     from_number = remove_extra_one(payload.phone_number)
@@ -98,7 +114,7 @@ async def send_message(payload: MessageRequest):
     return {"status": "success"}
 
 @app.get("/whatsapp/{phone_number_id}/profile")
-async def fetch_whatsapp_profile(phone_number_id: str):
+async def fetch_whatsapp_profile(phone_number_id: str, user=Depends(verify_user)):
     try:
         profile_data = await get_profile(phone_number_id)
         return {"status": "success", "data": profile_data}
@@ -106,7 +122,7 @@ async def fetch_whatsapp_profile(phone_number_id: str):
         return Response(status_code=400, content=str(e))
 
 @app.post("/whatsapp/{phone_number_id}/profile-photo")
-async def upload_whatsapp_profile_photo(phone_number_id: str, file: UploadFile = File(...)):
+async def upload_whatsapp_profile_photo(phone_number_id: str, file: UploadFile = File(...), user=Depends(verify_user)):
     try:
         file_bytes = await file.read()
         result = await update_profile_picture(phone_number_id, file_bytes, file.content_type)

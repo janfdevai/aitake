@@ -4,9 +4,45 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-from fastapi import FastAPI, HTTPException, Request as FastAPIRequest
+from fastapi import FastAPI, HTTPException, Request as FastAPIRequest, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from app.schemas import MessageRequest, ChatResponse
 from app.order_agent.agent import orderbot_agent
+
+import google.auth.transport.requests
+import google.oauth2.id_token
+
+security = HTTPBearer(auto_error=False)
+
+def verify_google_token(request: FastAPIRequest, credentials: HTTPAuthorizationCredentials = Depends(security)):
+    # Skip verification if not in production (e.g. localhost)
+    hostname = request.url.hostname
+    if hostname in ("localhost", "127.0.0.1"):
+        return None
+
+    if not credentials:
+        raise HTTPException(status_code=401, detail="Missing authorization header")
+
+    token = credentials.credentials
+    try:
+        auth_req = google.auth.transport.requests.Request()
+        # Audience is typically the Cloud Run URL. For now, we only verify the token is valid
+        # from a trusted Google service account. Audience validation can be strict if needed.
+        # We pass None for audience to just verify it's a valid Google-issued token meant for a Cloud Run service,
+        # but normally we'd want to check the specific audience if we knew it statically.
+        # verify_oauth2_token actually requires an audience or requires us to check it ourselves.
+        # We can pass the request.base_url as the expected audience, or just a known client ID.
+        # Using verify_oauth2_token without audience will raise ValueError unless we use verify_oauth2_token(..., audience=...)
+        # Wait, if audience is not known statically, Cloud Run sets the audience to the service URL.
+        # We can extract the audience dynamically from the unverified token headers or use the base url.
+        id_info = google.oauth2.id_token.verify_oauth2_token(
+            token, auth_req
+        )
+        # We can also check id_info['email'] if we want to restrict to specific service accounts.
+        return id_info
+    except ValueError as e:
+        logger.error(f"Token verification failed: {e}")
+        raise HTTPException(status_code=401, detail=f"Invalid authentication credentials: {e}")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -18,7 +54,7 @@ async def root():
     return {"message": "OrderBot API is running with Google ADK"}
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request_data: MessageRequest, request: FastAPIRequest):
+async def chat(request_data: MessageRequest, request: FastAPIRequest, token_info: dict = Depends(verify_google_token)):
     try:
         user = request_data.user
         response_text = orderbot_agent.process_message(

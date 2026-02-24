@@ -20,7 +20,7 @@ export default function Home() {
             <span className="text-xl font-bold tracking-tight">AITake</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
-            <Link href="#features" className="hover:text-white transition-colors">Featuress</Link>
+            <Link href="#features" className="hover:text-white transition-colors">Features</Link>
             <Link href="#how-it-works" className="hover:text-white transition-colors">How it Works</Link>
             <Link href="#demo" className="hover:text-white transition-colors">Demo</Link>
           </div>
@@ -46,7 +46,7 @@ export default function Home() {
             Automate Your Sales on <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">WhatsApp</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12 leading-relaxed">
-            Close deals while you sleep. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
+            Close deals while you rest. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
             <strong className="text-white font-medium mt-2 block">🌍 Free Early Access for the first 50 users (includes 1,000 free AI messages/mo) in exchange for feedback!</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">

@@ -3,6 +3,8 @@ from typing import Optional
 import httpx
 import os
 import json
+import google.auth.transport.requests
+import google.oauth2.id_token
 
 from .client import (
     mark_message_as_read,
@@ -67,8 +69,24 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
         
         with open("debug_log.txt", "a") as f:
             f.write(f"Calling OrderBot at {ORDERBOT_API_URL}/chat with payload: {json.dumps(payload)}\n")
+            
+        headers = {}
+        # Only attach Google Auth token if calling a Cloud Run URL (production)
+        if ".run.app" in ORDERBOT_API_URL:
+            try:
+                auth_req = google.auth.transport.requests.Request()
+                target_audience = ORDERBOT_API_URL
+                id_token = google.oauth2.id_token.fetch_id_token(auth_req, target_audience)
+                headers["Authorization"] = f"Bearer {id_token}"
+                with open("debug_log.txt", "a") as f:
+                    f.write(f"Successfully generated Google Auth token for production\n")
+            except Exception as auth_e:
+                with open("debug_log.txt", "a") as f:
+                    f.write(f"Failed to generate Google Auth token: {auth_e}\n")
+                print(f"Failed to generate Google Auth token: {auth_e}")
+
         async with httpx.AsyncClient() as client:
-            resp = await client.post(f"{ORDERBOT_API_URL}/chat", json=payload, timeout=60.0)
+            resp = await client.post(f"{ORDERBOT_API_URL}/chat", json=payload, headers=headers, timeout=60.0)
             with open("debug_log.txt", "a") as f:
                 f.write(f"OrderBot status: {resp.status_code}\n")
             resp.raise_for_status()

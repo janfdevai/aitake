@@ -1,0 +1,15 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0
+rootdir: C:\Users\janfd\Projects\aitake\orderbot
+configfile: pyproject.toml
+plugins: anyio-4.12.1, langsmith-0.6.7, asyncio-1.3.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 0 items
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\google\genai\_api_client.py:765
+  C:\Users\janfd\Projects\aitake\orderbot\.venv\Lib\site-packages\google\genai\_api_client.py:765: DeprecationWarning: Inheritance class AiohttpClientSession from ClientSession is discouraged
+    class AiohttpClientSession(aiohttp.ClientSession):  # type: ignore[misc]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================= 1 warning in 4.57s ==============================

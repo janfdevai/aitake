@@ -11,6 +11,15 @@ class ApiService {
     defaultValue: 'http://localhost:8002',
   );
 
+  Map<String, String> _getAuthHeaders() {
+    final session = supabase.auth.currentSession;
+    final headers = {'Content-Type': 'application/json'};
+    if (session != null) {
+      headers['Authorization'] = 'Bearer ${session.accessToken}';
+    }
+    return headers;
+  }
+
   // --- AUTH & MANAGER ---
   Future<void> login(String email, String password) async {
     await supabase.auth.signInWithPassword(email: email, password: password);
@@ -212,7 +221,7 @@ class ApiService {
         final uri = Uri.parse('$channelsApiUrl/send-message');
         final apiResponse = await http.post(
           uri,
-          headers: {'Content-Type': 'application/json'},
+          headers: _getAuthHeaders(),
           body: jsonEncode({
             'phone_number': phoneNumber,
             'content': content,
@@ -260,7 +269,7 @@ class ApiService {
     final uri = Uri.parse('$channelsApiUrl/whatsapp/onboard/start');
     final response = await http.post(
       uri,
-      headers: {'Content-Type': 'application/json'},
+      headers: _getAuthHeaders(),
       body: jsonEncode({
         'phone_number': phoneNumber,
         'display_name': displayName,
@@ -284,7 +293,7 @@ class ApiService {
     final uri = Uri.parse('$channelsApiUrl/whatsapp/onboard/verify');
     final response = await http.post(
       uri,
-      headers: {'Content-Type': 'application/json'},
+      headers: _getAuthHeaders(),
       body: jsonEncode({'phone_number_id': phoneNumberId, 'code': code}),
     );
 
@@ -302,7 +311,7 @@ class ApiService {
   // --- WHATSAPP PROFILE ---
   Future<Map<String, dynamic>> getWhatsAppProfile(String phoneNumberId) async {
     final uri = Uri.parse('$channelsApiUrl/whatsapp/$phoneNumberId/profile');
-    final response = await http.get(uri);
+    final response = await http.get(uri, headers: _getAuthHeaders());
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -321,6 +330,7 @@ class ApiService {
       '$channelsApiUrl/whatsapp/$phoneNumberId/profile-photo',
     );
     var request = http.MultipartRequest('POST', uri);
+    request.headers.addAll(_getAuthHeaders());
 
     var multipartFile = http.MultipartFile.fromBytes(
       'file',
