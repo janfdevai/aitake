@@ -58,6 +58,11 @@ class ApiService {
         .toList();
   }
 
+  Future<int> getManagerCount() async {
+    final response = await supabase.from('managers').select('manager_id');
+    return (response as List).length;
+  }
+
   Future<Manager> createManager(Map<String, dynamic> data) async {
     final response = await supabase
         .from('managers')

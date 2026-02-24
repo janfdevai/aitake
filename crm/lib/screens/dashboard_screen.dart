@@ -7,7 +7,11 @@ import 'orders_screen.dart';
 import 'menu_screen.dart';
 import 'login_screen.dart';
 import 'conversations_screen.dart';
+import 'whatsapp_verification_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -53,6 +57,8 @@ class DashboardScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Overview', style: Theme.of(context).textTheme.displayLarge),
+            const SizedBox(height: 16),
+            _SubscriptionCard(businessId: businessId),
             const SizedBox(height: 16),
             _BusinessProfileCard(businessId: businessId),
             const SizedBox(height: 24),
@@ -125,6 +131,31 @@ class DashboardScreen extends ConsumerWidget {
                 context,
                 MaterialPageRoute(builder: (_) => const ConversationsScreen()),
               ),
+            ),
+            _QuickActionTile(
+              title: 'Provide Feedback',
+              subtitle: 'Help us improve FastOrder',
+              icon: Icons.feedback_outlined,
+              onTap: () async {
+                final Uri emailLaunchUri = Uri(
+                  scheme: 'mailto',
+                  path: 'hello@aitake.com',
+                  queryParameters: {
+                    'subject': 'FastOrder Early Access Feedback',
+                  },
+                );
+                try {
+                  await launchUrl(emailLaunchUri);
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Could not open email app.'),
+                      ),
+                    );
+                  }
+                }
+              },
             ),
           ],
         ),
@@ -263,7 +294,102 @@ class _BusinessProfileCard extends ConsumerWidget {
       child: profileAsync.when(
         data: (profile) {
           if (profile == null) {
-            return const Text('WhatsApp not connected');
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'WhatsApp not connected',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Connect your WhatsApp Business number to receive messages and orders.',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () async {
+                    final businesses = await ref.read(
+                      managerBusinessesProvider.future,
+                    );
+                    final business = businesses.firstWhere(
+                      (b) => b.id == businessId,
+                    );
+                    if (context.mounted) {
+                      final phoneController = TextEditingController(
+                        text: business.whatsappPhoneNumber ?? '',
+                      );
+                      final result = await showDialog<String>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Connect WhatsApp'),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Text(
+                                'Enter the WhatsApp Business phone number to connect.',
+                              ),
+                              const SizedBox(height: 16),
+                              TextField(
+                                controller: phoneController,
+                                keyboardType: TextInputType.phone,
+                                decoration: const InputDecoration(
+                                  labelText: 'Phone Number',
+                                  prefixIcon: Icon(Icons.phone_android),
+                                  border: OutlineInputBorder(),
+                                  filled: true,
+                                ),
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                if (phoneController.text.trim().isNotEmpty) {
+                                  Navigator.of(
+                                    context,
+                                  ).pop(phoneController.text.trim());
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppTheme.primaryColor,
+                                foregroundColor: Colors.white,
+                              ),
+                              child: const Text('Continue'),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (result != null &&
+                          result.isNotEmpty &&
+                          context.mounted) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => WhatsAppVerificationScreen(
+                              businessId: business.id,
+                              phoneNumber: result,
+                              businessName: business.name,
+                            ),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryColor,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Connect WhatsApp'),
+                ),
+              ],
+            );
           }
           final String? photoUrl = profile['profile_picture_url'];
 
@@ -349,6 +475,190 @@ class _BusinessProfileCard extends ConsumerWidget {
         },
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, st) => Text('Error: $e'),
+      ),
+    );
+  }
+}
+
+class _SubscriptionCard extends ConsumerWidget {
+  final String businessId;
+  const _SubscriptionCard({required this.businessId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final businessesAsync = ref.watch(managerBusinessesProvider);
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: AppTheme.primaryColor.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: AppTheme.primaryColor.withValues(alpha: 0.2)),
+      ),
+      child: businessesAsync.when(
+        data: (businesses) {
+          final business = businesses.firstWhere((b) => b.id == businessId);
+          final isFree = business.subscriptionTier == 'free';
+          final messageCount = business.aiMessageCount;
+          final maxMessages = 1000;
+          final isNearLimit = isFree && messageCount >= (maxMessages * 0.8);
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Plan: ${business.subscriptionTier.toUpperCase()}',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.primaryColor,
+                    ),
+                  ),
+                  if (isFree)
+                    ElevatedButton.icon(
+                      onPressed: () async {
+                        if (!kIsWeb) {
+                          try {
+                            await Purchases.logIn(business.id);
+                            final offerings = await Purchases.getOfferings();
+                            if (offerings.current != null &&
+                                offerings
+                                    .current!
+                                    .availablePackages
+                                    .isNotEmpty) {
+                              final package =
+                                  offerings.current!.availablePackages.first;
+                              final customerInfo =
+                                  await Purchases.purchasePackage(package);
+                              if (customerInfo
+                                      .entitlements
+                                      .all['pro']
+                                      ?.isActive ==
+                                  true) {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Successfully upgraded to Pro!',
+                                      ),
+                                    ),
+                                  );
+                                }
+                              }
+                            } else {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'No subscriptions available.',
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          } on Exception catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Purchase failed.'),
+                                ),
+                              );
+                            }
+                          }
+                        } else {
+                          try {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Preparing secure checkout...'),
+                                ),
+                              );
+                            }
+                            final response = await ref
+                                .read(apiServiceProvider)
+                                .supabase
+                                .functions
+                                .invoke(
+                                  'create_stripe_checkout',
+                                  body: {'business_id': business.id},
+                                );
+                            final url = response.data['url'] as String?;
+                            if (url != null) {
+                              await launchUrl(
+                                Uri.parse(url),
+                                webOnlyWindowName: '_self',
+                              );
+                            } else {
+                              throw Exception('No URL returned');
+                            }
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Could not start checkout: $e'),
+                                ),
+                              );
+                            }
+                          }
+                        }
+                      },
+                      icon: const Icon(Icons.star, size: 18),
+                      label: const Text('Upgrade to Pro'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.secondaryColor,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              if (isFree) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'AI Messages Used',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      '$messageCount / $maxMessages',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: isNearLimit
+                            ? AppTheme.errorColor
+                            : AppTheme.textColorPrimary,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                LinearProgressIndicator(
+                  value: (messageCount / maxMessages).clamp(0.0, 1.0),
+                  backgroundColor: Colors.grey.withValues(alpha: 0.2),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    isNearLimit ? AppTheme.errorColor : AppTheme.primaryColor,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                  minHeight: 8,
+                ),
+              ] else ...[
+                Text(
+                  'Unlimited AI Messages',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (e, st) => Text('Error loading subscription'),
       ),
     );
   }

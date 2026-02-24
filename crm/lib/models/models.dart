@@ -44,6 +44,8 @@ class Business {
   final String? address;
   final String? logoUrl;
   final bool isActive;
+  final int aiMessageCount;
+  final String subscriptionTier;
 
   String get id => businessId;
 
@@ -55,6 +57,8 @@ class Business {
     this.address,
     this.logoUrl,
     this.isActive = true,
+    this.aiMessageCount = 0,
+    this.subscriptionTier = 'free',
   });
 
   factory Business.fromJson(Map<String, dynamic> json) {
@@ -66,6 +70,8 @@ class Business {
       address: json['address'],
       logoUrl: json['logo_url'],
       isActive: json['is_active'] ?? true,
+      aiMessageCount: json['ai_message_count'] ?? 0,
+      subscriptionTier: json['subscription_tier'] ?? 'free',
     );
   }
 
@@ -77,6 +83,8 @@ class Business {
     'address': address,
     'logo_url': logoUrl,
     'is_active': isActive,
+    'ai_message_count': aiMessageCount,
+    'subscription_tier': subscriptionTier,
   };
 }
 

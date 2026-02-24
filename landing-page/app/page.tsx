@@ -40,14 +40,14 @@ export default function Home() {
         <section className="relative max-w-7xl mx-auto px-6 pt-32 pb-40 flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 text-indigo-300 font-medium mb-8 backdrop-blur-sm border border-indigo-500/30">
             <span className="flex h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
-            AITake is in Early Access — Help us build it!
+            AITake is in Early Access — Only 50 free spots available!
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-4xl mb-8 leading-[1.1]">
             Automate Your Sales on <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">WhatsApp</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12 leading-relaxed">
             Close deals while you sleep. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
-            <strong className="text-white font-medium mt-2 block">🌍 We are currently offering full, free access in exchange for your feedback!</strong>
+            <strong className="text-white font-medium mt-2 block">🌍 Free Early Access for the first 50 users (includes 1,000 free AI messages/mo) in exchange for feedback!</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)]">
@@ -160,7 +160,7 @@ export default function Home() {
             <div className="rounded-3xl bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-white/10 p-12 md:p-20 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('/favicon.ico')] opacity-5 bg-center bg-repeat mix-blend-overlay"></div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 relative z-10">Help us shape the future of sales.</h2>
-              <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto relative z-10">We are offering full, free access to our platform for early adopters who are willing to share their feedback and help us build the best WhatsApp CRM.</p>
+              <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto relative z-10">We are offering full, free access to the first 50 early adopters who are willing to share their feedback and help us build the best WhatsApp CRM. (Includes 1,000 free AI interactions per month)</p>
               <div className="flex justify-center relative z-10">
                 <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
                   Claim Your Free Access <ArrowRight className="w-5 h-5" />
@@ -171,8 +171,45 @@ export default function Home() {
         </section>
       </main>
 
+      {/* Pricing Section */}
+      <div id="pricing" className="py-24 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, transparent pricing</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">Start for free and upgrade when you need more volume.</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+
+          {/* Free Tier */}
+          <div className="bg-slate-900/50 border border-slate-700/50 rounded-2xl p-8 backdrop-blur-sm">
+            <h3 className="text-2xl font-bold mb-2">Early Access Free</h3>
+            <p className="text-slate-400 mb-6">Perfect for trying out the platform.</p>
+            <div className="text-4xl font-bold mb-8">$0<span className="text-lg text-slate-500 font-normal">/mo</span></div>
+            <ul className="space-y-4 mb-8">
+              <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> 1,000 AI Messages / month</li>
+              <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Full CRM Access</li>
+              <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Webhook Integration</li>
+            </ul>
+            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="block w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 text-center rounded-lg font-medium transition-colors">Start Free</Link>
+          </div>
+
+          {/* Pro Tier */}
+          <div className="bg-indigo-600/10 border border-indigo-500/50 rounded-2xl p-8 backdrop-blur-sm relative shadow-2xl shadow-indigo-500/10">
+            <div className="absolute top-0 right-8 -translate-y-1/2 px-3 py-1 bg-indigo-500 text-xs font-bold uppercase tracking-wider rounded-full text-white">Most Popular</div>
+            <h3 className="text-2xl font-bold mb-2 text-white">Pro</h3>
+            <p className="text-indigo-200 mb-6">For growing businesses automating sales.</p>
+            <div className="text-4xl font-bold mb-8 text-white">$49<span className="text-lg text-indigo-300 font-normal">/mo</span></div>
+            <ul className="space-y-4 mb-8">
+              <li className="flex items-center gap-3 text-white"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> 10,000 AI Messages / month</li>
+              <li className="flex items-center gap-3 text-white"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Unlimited CRM Users</li>
+              <li className="flex items-center gap-3 text-white"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Priority Support</li>
+            </ul>
+            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="block w-full py-3 px-4 bg-indigo-500 hover:bg-indigo-600 text-white text-center rounded-lg font-medium transition-colors shadow-lg shadow-indigo-500/25">Upgrade to Pro</Link>
+          </div>
+        </div>
+      </div>
+
       {/* Footer */}
-      <footer className="border-t border-white/10 py-12 bg-slate-950">
+      <footer className="border-t border-slate-800 py-12 relative z-10 mt-12">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center font-bold text-xs">AI</div>
@@ -187,6 +224,15 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Feedback Button */}
+      <a
+        href="mailto:hello@aitake.com?subject=AITake%20Early%20Access%20Feedback"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-5 py-3 shadow-lg shadow-indigo-600/30 transition-all hover:-translate-y-1 hover:shadow-indigo-600/50 border border-indigo-500/50"
+      >
+        <MessageSquare className="w-5 h-5" />
+        <span className="font-medium">Feedback</span>
+      </a>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/providers.dart';
 import '../theme/app_theme.dart';
-import 'whatsapp_verification_screen.dart';
+import 'business_list_screen.dart';
 
 class RegisterBusinessScreen extends ConsumerStatefulWidget {
   const RegisterBusinessScreen({super.key});
@@ -19,7 +19,6 @@ class _RegisterBusinessScreenState
   final _managerNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _addressController = TextEditingController();
-  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   bool _obscurePassword = true;
@@ -30,7 +29,6 @@ class _RegisterBusinessScreenState
     _managerNameController.dispose();
     _emailController.dispose();
     _addressController.dispose();
-    _phoneController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -112,15 +110,7 @@ class _RegisterBusinessScreenState
                 _addressController,
                 validator: (v) => v!.isEmpty ? 'Address is required' : null,
               ),
-              const SizedBox(height: 16),
-              _buildTextField(
-                'WhatsApp Phone',
-                Icons.phone_android,
-                _phoneController,
-                keyboardType: TextInputType.phone,
-                validator: (v) => v!.isEmpty ? 'Phone is required' : null,
-              ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 32),
               SizedBox(
                 width: double.infinity,
                 height: 56,
@@ -206,6 +196,14 @@ class _RegisterBusinessScreenState
       final email = _emailController.text.trim();
       final password = _passwordController.text.trim();
 
+      // 0. Check 50 user limit
+      final managerCount = await apiService.getManagerCount();
+      if (managerCount >= 50) {
+        throw Exception(
+          'Early access is currently full (50/50 users). Please check back later.',
+        );
+      }
+
       // 1. Register in Supabase Auth
       final authResponse = await apiService.register(email, password);
       final user = authResponse.user;
@@ -221,27 +219,21 @@ class _RegisterBusinessScreenState
 
       final manager = await apiService.createManager(managerData);
 
-      // 2. Create Business linked to manager
       final businessData = {
         'name': _nameController.text.trim(),
         'address': _addressController.text.trim(),
-        'whatsapp_phone_number': _phoneController.text.trim(),
+        'whatsapp_phone_number': null,
       };
 
-      final business = await apiService.createBusiness(
+      await apiService.createBusiness(
         businessData,
         managerId: manager.managerId,
       );
 
       if (mounted) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => WhatsAppVerificationScreen(
-              businessId: business.businessId,
-              phoneNumber: _phoneController.text.trim(),
-              businessName: _nameController.text.trim(),
-            ),
-          ),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const BusinessListScreen()),
+          (route) => false,
         );
       }
     } catch (e) {

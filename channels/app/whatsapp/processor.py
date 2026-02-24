@@ -51,7 +51,7 @@ async def save_message(conversation_id: str, content: str, sender_type: str):
         print(f"Error saving message to Supabase: {e}")
 
 
-async def run_agent_and_send_reply(message_content: str, from_number: str, business_number: str, client_wa_id: str, client_name: str, conversation_id: Optional[str] = None, phone_number_id: Optional[str] = None):
+async def run_agent_and_send_reply(message_content: str, from_number: str, business_number: str, client_wa_id: str, client_name: str, conversation_id: Optional[str] = None, phone_number_id: Optional[str] = None, business_uuid: Optional[str] = None):
     try:
         # Prepare payload for OrderBot API
         payload = {
@@ -82,6 +82,16 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
             if conversation_id and response_text:
                 await save_message(conversation_id, response_text, "bot")
             
+            # Increment AI message count
+            if business_uuid:
+                try:
+                    b_query = supabase.table("businesses").select("ai_message_count").eq("business_id", business_uuid).execute()
+                    if b_query.data:
+                        current_count = b_query.data[0].get("ai_message_count") or 0
+                        supabase.table("businesses").update({"ai_message_count": current_count + 1}).eq("business_id", business_uuid).execute()
+                except Exception as e:
+                    print(f"Error incrementing ai_message_count: {e}")
+
             await process_message_answer(response_text, image_path, from_number, phone_number_id)
 
     except Exception as e:
@@ -132,12 +142,17 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
                 all_b = supabase.table("businesses").select("*").execute()
                 with open("debug_log.txt", "a") as f:
                     f.write(f"All businesses in DB: {all_b.data}\n")
-                b_query = supabase.table("businesses").select("business_id, whatsapp_phone_number_id").eq("whatsapp_phone_number", business_phone).execute()
+                b_query = supabase.table("businesses").select("business_id, whatsapp_phone_number_id, ai_message_count, subscription_tier").eq("whatsapp_phone_number", business_phone).execute()
                 with open("debug_log.txt", "a") as f:
                     f.write(f"Business query result: {b_query.data}\n")
+                
+                ai_message_count = 0
+                subscription_tier = 'free'
                 if b_query.data:
                     business_uuid = b_query.data[0].get("business_id")
                     whatsapp_phone_number_id = b_query.data[0].get("whatsapp_phone_number_id")
+                    ai_message_count = b_query.data[0].get("ai_message_count") or 0
+                    subscription_tier = b_query.data[0].get("subscription_tier") or 'free'
                 
                 if business_uuid:
                     # Resolve/Create Client
@@ -193,6 +208,23 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
                 f.write(f"Resolved business_uuid: {business_uuid}, client_uuid: {client_uuid}, conversation_id: {conversation_id}\n")
             print(f"Message from {from_number}: {message_content}")
             
+            # Check AI message limits based on tier
+            has_reached_limit = False
+            if 'subscription_tier' in locals() and 'ai_message_count' in locals():
+                if subscription_tier == 'free' and ai_message_count >= 1000:
+                    has_reached_limit = True
+                elif subscription_tier == 'pro' and ai_message_count >= 10000:
+                    has_reached_limit = True
+
+            if has_reached_limit:
+                limit_msg = "You have reached your AI message limit for the month. To continue using AITake, please upgrade your plan or wait until your limit resets."
+                await send_whatsapp_text_message(from_number, limit_msg, phone_number_id=resolved_phone_number_id)
+                # Still save the incoming message if conversation exists, but don't process via agent
+                if conversation_id:
+                    await save_message(conversation_id, message_content, "client")
+                    await save_message(conversation_id, limit_msg, "bot")
+                return {"status": "accepted"}
+
             # 2. Save incoming message to conversation tracking
             if conversation_id:
                 await save_message(conversation_id, message_content, "client")
@@ -206,7 +238,8 @@ async def process_request(request: Request, background_tasks: BackgroundTasks):
                 client_wa_id,
                 client_name,
                 conversation_id,
-                resolved_phone_number_id
+                resolved_phone_number_id,
+                business_uuid
             )
         return {"status": "accepted"}
     except Exception as e:

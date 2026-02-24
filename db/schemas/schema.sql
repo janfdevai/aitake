@@ -31,6 +31,8 @@ CREATE TABLE businesses (
     address TEXT,
     logo_url TEXT,
     is_active BOOLEAN DEFAULT true,
+    ai_message_count INTEGER DEFAULT 0,
+    subscription_tier TEXT DEFAULT 'free',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

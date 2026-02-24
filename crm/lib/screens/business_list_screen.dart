@@ -62,6 +62,113 @@ class BusinessListScreen extends ConsumerWidget {
         error: (err, stack) => Center(child: Text('Error: $err')),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddBusinessDialog(context, ref),
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Future<void> _showAddBusinessDialog(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    final nameController = TextEditingController();
+    final addressController = TextEditingController();
+    bool isLoading = false;
+
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            title: const Text('Add New Business'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Business Name',
+                    prefixIcon: Icon(Icons.business),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: addressController,
+                  decoration: const InputDecoration(
+                    labelText: 'Address',
+                    prefixIcon: Icon(Icons.location_on),
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: isLoading ? null : () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: isLoading
+                    ? null
+                    : () async {
+                        if (nameController.text.trim().isEmpty ||
+                            addressController.text.trim().isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Please fill all fields'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+
+                        setState(() => isLoading = true);
+
+                        try {
+                          final apiService = ref.read(apiServiceProvider);
+                          final manager = await apiService.getCurrentManager();
+                          if (manager == null) {
+                            throw Exception('Manager not found');
+                          }
+
+                          await apiService.createBusiness({
+                            'name': nameController.text.trim(),
+                            'address': addressController.text.trim(),
+                            'whatsapp_phone_number': null,
+                          }, managerId: manager.managerId);
+
+                          ref.invalidate(managerBusinessesProvider);
+                          if (context.mounted) {
+                            Navigator.of(context).pop();
+                          }
+                        } catch (e) {
+                          setState(() => isLoading = false);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Error: $e'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        }
+                      },
+                child: isLoading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Create'),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

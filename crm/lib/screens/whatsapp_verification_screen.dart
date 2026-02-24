@@ -185,9 +185,21 @@ class _WhatsAppVerificationScreenState
                       ),
               ),
               const SizedBox(height: 16),
-              TextButton(
-                onPressed: _isLoading ? null : _sendCode,
-                child: const Text('Resend Code'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                    },
+                    child: const Text('Skip for now'),
+                  ),
+                  const SizedBox(width: 16),
+                  TextButton(
+                    onPressed: _isLoading ? null : _sendCode,
+                    child: const Text('Resend Code'),
+                  ),
+                ],
               ),
             ],
           ],
