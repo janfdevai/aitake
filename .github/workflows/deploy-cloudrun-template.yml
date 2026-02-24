@@ -69,6 +69,7 @@ jobs:
           region: '${{ secrets.region }}'
           image: '${{ secrets.region }}-docker.pkg.dev/${{ secrets.project_id }}/${{ secrets.service_name }}/${{ secrets.service_name }}:${{ github.sha }}'
           flags: '${{ inputs.flags }}'
+          env_vars: 'ENVIRONMENT=production'
 
       - name: 'Show output'
         run: echo "Deployed to ${{ steps.deploy.outputs.url }}"

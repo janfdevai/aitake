@@ -15,9 +15,8 @@ import google.oauth2.id_token
 security = HTTPBearer(auto_error=False)
 
 def verify_google_token(request: FastAPIRequest, credentials: HTTPAuthorizationCredentials = Depends(security)):
-    # Skip verification if not in production (e.g. localhost)
-    hostname = request.url.hostname
-    if hostname in ("localhost", "127.0.0.1"):
+    # Skip verification if not in production
+    if os.getenv("ENVIRONMENT") != "production":
         return None
 
     if not credentials:

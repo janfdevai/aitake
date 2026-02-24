@@ -71,8 +71,8 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
             f.write(f"Calling OrderBot at {ORDERBOT_API_URL}/chat with payload: {json.dumps(payload)}\n")
             
         headers = {}
-        # Only attach Google Auth token if calling a Cloud Run URL (production)
-        if ".run.app" in ORDERBOT_API_URL:
+        # Only attach Google Auth token if in production
+        if os.getenv("ENVIRONMENT") == "production":
             try:
                 auth_req = google.auth.transport.requests.Request()
                 target_audience = ORDERBOT_API_URL

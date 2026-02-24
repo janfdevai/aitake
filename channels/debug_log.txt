@@ -17349,3 +17349,4 @@ Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Leng
 Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
 Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
 Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
+Supabase Client Config - URL: https://kxwwlqoybtoocijtqsfg.supabase.co, Key Length: 208
