@@ -74,12 +74,17 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
         # Only attach Google Auth token if in production
         if os.getenv("ENVIRONMENT") == "production":
             try:
+                from urllib.parse import urlparse
                 auth_req = google.auth.transport.requests.Request()
-                target_audience = ORDERBOT_API_URL
+                
+                # Cloud Run requires the exact service URL as the audience, without paths like /chat
+                parsed_url = urlparse(ORDERBOT_API_URL)
+                target_audience = f"{parsed_url.scheme}://{parsed_url.netloc}"
+                
                 id_token = google.oauth2.id_token.fetch_id_token(auth_req, target_audience)
                 headers["Authorization"] = f"Bearer {id_token}"
                 with open("debug_log.txt", "a") as f:
-                    f.write(f"Successfully generated Google Auth token for production\n")
+                    f.write(f"Successfully generated Google Auth token for production audience: {target_audience}\n")
             except Exception as auth_e:
                 with open("debug_log.txt", "a") as f:
                     f.write(f"Failed to generate Google Auth token: {auth_e}\n")
