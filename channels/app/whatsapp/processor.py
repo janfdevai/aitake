@@ -99,7 +99,7 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
                 parsed_url = urlparse(ORDERBOT_API_URL)
                 target_audience = f"{parsed_url.scheme}://{parsed_url.netloc}"
                 
-                id_token = await get_id_token(target_audience)
+                id_token = await get_id_token(ORDERBOT_API_URL)
                 headers["Authorization"] = f"Bearer {id_token}"
                 with open("debug_log.txt", "a") as f:
                     f.write(f"Successfully generated/retrieved Google Auth token for production audience: {target_audience}\n")
