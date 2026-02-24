@@ -5,6 +5,8 @@ import os
 import json
 import google.auth.transport.requests
 import google.oauth2.id_token
+import asyncio
+import time
 
 from .client import (
     mark_message_as_read,
@@ -18,6 +20,23 @@ from .utils import process_message_type, remove_extra_one
 
 # Configuration
 ORDERBOT_API_URL = os.getenv("ORDERBOT_API_URL", "http://localhost:8001")
+
+# Simple in-memory cache: { "token": str, "expiry": float }
+_token_cache = {"token": None, "expiry": 0.0}
+
+async def get_id_token(url: str) -> str:
+    """Fetch ID token for the given URL with caching."""
+    now = time.time()
+    if _token_cache["token"] and _token_cache["expiry"] > now:
+        return _token_cache["token"]
+
+    auth_req = google.auth.transport.requests.Request()
+    token = await asyncio.to_thread(google.oauth2.id_token.fetch_id_token, auth_req, url)
+
+    # Cache for 50 minutes (3000 seconds) - typical Google tokens last 1h
+    _token_cache["token"] = token
+    _token_cache["expiry"] = now + 3000
+    return token
 
 def verify_subscription(subscription: Subscription):
     if subscription.mode == "subscribe" and subscription.token == VERIFY_TOKEN:
@@ -75,16 +94,15 @@ async def run_agent_and_send_reply(message_content: str, from_number: str, busin
         if os.getenv("ENVIRONMENT") == "production":
             try:
                 from urllib.parse import urlparse
-                auth_req = google.auth.transport.requests.Request()
                 
                 # Cloud Run requires the exact service URL as the audience, without paths like /chat
                 parsed_url = urlparse(ORDERBOT_API_URL)
                 target_audience = f"{parsed_url.scheme}://{parsed_url.netloc}"
                 
-                id_token = google.oauth2.id_token.fetch_id_token(auth_req, target_audience)
+                id_token = await get_id_token(target_audience)
                 headers["Authorization"] = f"Bearer {id_token}"
                 with open("debug_log.txt", "a") as f:
-                    f.write(f"Successfully generated Google Auth token for production audience: {target_audience}\n")
+                    f.write(f"Successfully generated/retrieved Google Auth token for production audience: {target_audience}\n")
             except Exception as auth_e:
                 with open("debug_log.txt", "a") as f:
                     f.write(f"Failed to generate Google Auth token: {auth_e}\n")
