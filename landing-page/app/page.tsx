@@ -14,12 +14,19 @@ export default function Home() {
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [step, setStep] = useState<'email' | 'feedback' | 'success'>('email');
+  const [step, setStep] = useState<'email' | 'feedback' | 'success' | 'combined'>('email');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const openWaitlist = (e: React.MouseEvent) => {
     e.preventDefault();
+    setStep('email');
+    setIsWaitlistOpen(true);
+  };
+
+  const openFeedback = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setStep('combined');
     setIsWaitlistOpen(true);
   };
 
@@ -84,6 +91,48 @@ export default function Home() {
     }
   };
 
+  const handleCombinedSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsSubmitting(true);
+    setErrorMsg("");
+
+    try {
+      if (supabaseUrl === "https://placeholder-project.supabase.co") {
+        throw new Error("Missing Supabase configuration. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your .env file.");
+      }
+
+      // Try insert first
+      const { error: insertError } = await supabase
+        .from("waitlist")
+        .insert([{ email, feedback: feedback || null }]);
+
+      if (insertError) {
+        if (insertError.code === '23505') {
+          // Already exists, just update feedback
+          if (feedback.trim()) {
+            const { error: updateError } = await supabase
+              .from("waitlist")
+              .update({ feedback })
+              .eq('email', email);
+
+            if (updateError) throw updateError;
+          }
+        } else {
+          throw insertError;
+        }
+      }
+
+      showSuccessAndClose();
+    } catch (err: any) {
+      console.error("Waitlist error:", err);
+      setErrorMsg(err?.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const skipFeedback = () => {
     showSuccessAndClose();
   };
@@ -130,6 +179,69 @@ export default function Home() {
                   <h4 className="text-lg font-semibold mb-2">You're on the list!</h4>
                   <p className="text-slate-400">We'll notify you as soon as a spot opens up.</p>
                 </div>
+              ) : step === 'combined' ? (
+                <form onSubmit={handleCombinedSubmit} className="space-y-4 animate-in slide-in-from-bottom duration-300 fade-in">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-500/20 text-indigo-400 mb-4">
+                      <MessageSquare className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-white mb-2">Leave Feedback</h4>
+                    <p className="text-slate-300 text-sm">
+                      We're building this for you. Let us know what you want to see.
+                    </p>
+                  </div>
+
+                  {errorMsg && (
+                    <div className="p-3 text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-400 mb-1.5">Email address <span className="text-red-400">*</span></label>
+                      <input
+                        type="email"
+                        id="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="you@company.com"
+                        className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-50 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="feedback-combined" className="block text-sm font-medium text-slate-400 mb-1.5 flex justify-between">
+                        <span>What feature would you love to see?</span>
+                        <span className="text-slate-600 text-xs">Optional</span>
+                      </label>
+                      <textarea
+                        id="feedback-combined"
+                        rows={3}
+                        value={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                        placeholder="e.g. Shopify integration, custom bot personalities..."
+                        className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-50 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all resize-none"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 disabled:from-slate-700 disabled:to-slate-800 disabled:text-slate-400 text-white font-medium py-3 rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(79,70,229,0.5)] disabled:shadow-none flex items-center justify-center gap-2 mt-4"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        Submitting...
+                      </>
+                    ) : (
+                      "Submit Feedback"
+                    )}
+                  </button>
+                </form>
               ) : step === 'email' ? (
                 <form onSubmit={handleEmailSubmit} className="space-y-4 animate-in slide-in-from-left duration-300 fade-in">
                   <p className="text-slate-300 mb-6">
@@ -458,13 +570,13 @@ export default function Home() {
       </footer>
 
       {/* Floating Feedback Button */}
-      <a
-        href="mailto:hello@aitake.com?subject=AITake%20Early%20Access%20Feedback"
+      <button
+        onClick={openFeedback}
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full px-5 py-3 shadow-lg shadow-indigo-600/30 transition-all hover:-translate-y-1 hover:shadow-indigo-600/50 border border-indigo-500/50"
       >
         <MessageSquare className="w-5 h-5" />
         <span className="font-medium">Feedback</span>
-      </a>
+      </button>
     </div>
   );
 }
