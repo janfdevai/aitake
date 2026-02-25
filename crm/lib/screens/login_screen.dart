@@ -41,7 +41,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 const Icon(Icons.rocket_launch, size: 80, color: Colors.white),
                 const SizedBox(height: 24),
                 Text(
-                  'FastOrder CRM',
+                  'AIOTake CRM',
                   style: Theme.of(
                     context,
                   ).textTheme.displayLarge?.copyWith(color: Colors.white),

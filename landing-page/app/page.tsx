@@ -245,7 +245,7 @@ export default function Home() {
               ) : step === 'email' ? (
                 <form onSubmit={handleEmailSubmit} className="space-y-4 animate-in slide-in-from-left duration-300 fade-in">
                   <p className="text-slate-300 mb-6">
-                    AITake is currently in early access. Enter your email to secure your spot in line.
+                    AIOTake is currently in early access. Enter your email to secure your spot in line.
                   </p>
 
                   {errorMsg && (
@@ -361,7 +361,7 @@ export default function Home() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center font-bold text-lg">
               AI
             </div>
-            <span className="text-xl font-bold tracking-tight">AITake</span>
+            <span className="text-xl font-bold tracking-tight">AIOTake</span>
           </div>
           <div className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
             <Link href="#features" className="hover:text-white transition-colors">Features</Link>
@@ -384,13 +384,13 @@ export default function Home() {
         <section className="relative max-w-7xl mx-auto px-6 pt-32 pb-40 flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-500/20 text-indigo-300 font-medium mb-8 backdrop-blur-sm border border-indigo-500/30">
             <span className="flex h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
-            AITake is in Early Access — Only 50 free spots available!
+            AIOTake is in Early Access — Only 50 free spots available!
           </div>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-4xl mb-8 leading-[1.1]">
             Automate Your Sales on <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">WhatsApp</span>
           </h1>
           <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12 leading-relaxed">
-            Close deals while you rest. AITake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
+            Close deals while you rest. AIOTake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
             <strong className="text-white font-medium mt-2 block">🌍 Free Early Access for the first 50 users (includes 1,000 free AI messages/mo) in exchange for feedback!</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -472,7 +472,7 @@ export default function Home() {
         <section id="how-it-works" className="py-24 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="md:w-1/2 mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">How AITake Works</h2>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">How AIOTake Works</h2>
               <p className="text-slate-400 text-lg">Three simple steps to transform your WhatsApp business presence.</p>
             </div>
 
@@ -557,10 +557,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center font-bold text-xs">AI</div>
-            <span className="font-semibold text-slate-200">AITake</span>
+            <span className="font-semibold text-slate-200">AIOTake</span>
           </div>
           <div className="text-sm text-slate-500">
-            © {new Date().getFullYear()} AITake. All rights reserved.
+            © {new Date().getFullYear()} AIOTake. All rights reserved.
           </div>
           <div className="flex gap-6 text-sm text-slate-400">
             <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>

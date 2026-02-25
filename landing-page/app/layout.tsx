@@ -13,11 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AITake | AI-Powered Orderbot & CRM for WhatsApp",
-  description: "Automate your sales and customer support with AITake. A powerful Orderbot and CRM platform perfectly integrated with WhatsApp.",
-  keywords: ["AITake", "AI Orderbot", "WhatsApp CRM", "Automated Sales", "Customer Support", "AI Assistant"],
+  title: "AIOTake | AI-Powered Orderbot & CRM for WhatsApp",
+  description: "Automate your sales and customer support with AIOTake. A powerful Orderbot and CRM platform perfectly integrated with WhatsApp.",
+  keywords: ["AIOTake", "AI Orderbot", "WhatsApp CRM", "Automated Sales", "Customer Support", "AI Assistant"],
   openGraph: {
-    title: "AITake | Automate Sales on WhatsApp",
+    title: "AIOTake | Automate Sales on WhatsApp",
     description: "24/7 AI automated ordering and seamless CRM integration for your business.",
     type: "website",
   }

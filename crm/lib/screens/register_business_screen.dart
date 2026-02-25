@@ -52,7 +52,7 @@ class _RegisterBusinessScreenState
               ),
               const SizedBox(height: 8),
               Text(
-                'Join the FastOrder platform and start taking orders.',
+                'Join the AIOTake platform and start taking orders.',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 32),

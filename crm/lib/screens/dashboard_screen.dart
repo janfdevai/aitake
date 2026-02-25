@@ -134,15 +134,13 @@ class DashboardScreen extends ConsumerWidget {
             ),
             _QuickActionTile(
               title: 'Provide Feedback',
-              subtitle: 'Help us improve FastOrder',
+              subtitle: 'Help us improve AIOTake',
               icon: Icons.feedback_outlined,
               onTap: () async {
                 final Uri emailLaunchUri = Uri(
                   scheme: 'mailto',
-                  path: 'hello@aitake.com',
-                  queryParameters: {
-                    'subject': 'FastOrder Early Access Feedback',
-                  },
+                  path: 'hello@aiotake.com',
+                  queryParameters: {'subject': 'AIOTake Early Access Feedback'},
                 );
                 try {
                   await launchUrl(emailLaunchUri);
