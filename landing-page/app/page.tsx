@@ -1,9 +1,241 @@
-import { ArrowRight, Bot, MessageSquare, BarChart3, CheckCircle2 } from "lucide-react";
+"use client";
+
+import { ArrowRight, Bot, MessageSquare, BarChart3, CheckCircle2, X } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+// Initialize Supabase. Note: You will need these env vars in your .env.local
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder-project.supabase.co";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-key";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function Home() {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [feedback, setFeedback] = useState("");
+  const [step, setStep] = useState<'email' | 'feedback' | 'success'>('email');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const openWaitlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsWaitlistOpen(true);
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsSubmitting(true);
+    setErrorMsg("");
+
+    try {
+      if (supabaseUrl === "https://placeholder-project.supabase.co") {
+        throw new Error("Missing Supabase configuration. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your .env file.");
+      }
+
+      // 1. Send email to Supabase waitlist table
+      const { error } = await supabase
+        .from("waitlist")
+        .insert([{ email }]);
+
+      // NOTE: We don't care about a unique constraint violation (code 23505),
+      // we still let them proceed to give feedback.
+      if (error && error.code !== '23505') {
+        setErrorMsg(error.message || "Failed to join waitlist. Please check your connection.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Move to feedback step
+      setStep('feedback');
+    } catch (err: any) {
+      console.error("Waitlist error:", err);
+      setErrorMsg(err?.message || "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleFeedbackSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+    setErrorMsg("");
+
+    try {
+      if (feedback.trim()) {
+        const { error } = await supabase
+          .from("waitlist")
+          .update({ feedback })
+          .eq('email', email);
+
+        if (error) {
+          console.error("Failed to save feedback", error);
+        }
+      }
+
+      showSuccessAndClose();
+    } catch (err: any) {
+      console.error("Feedback error:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const skipFeedback = () => {
+    showSuccessAndClose();
+  };
+
+  const showSuccessAndClose = () => {
+    setStep('success');
+    setTimeout(() => {
+      setIsWaitlistOpen(false);
+      setStep('email');
+      setEmail("");
+      setFeedback("");
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 font-sans selection:bg-indigo-500/30">
+      {/* Waitlist Modal */}
+      {isWaitlistOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+            onClick={() => setIsWaitlistOpen(false)}
+          />
+          <div className="relative w-full max-w-md bg-slate-900 border border-slate-700/50 rounded-2xl shadow-2xl shadow-indigo-500/10 overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-6 border-b border-slate-800">
+              <h3 className="text-xl font-bold">Join the Waitlist</h3>
+              <button
+                onClick={() => setIsWaitlistOpen(false)}
+                className="text-slate-400 hover:text-white transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6">
+              {step === 'success' ? (
+                <div className="text-center py-8 animate-in fade-in duration-300">
+                  <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 animate-in zoom-in duration-300 delay-150">
+                    <CheckCircle2 className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-lg font-semibold mb-2">You're on the list!</h4>
+                  <p className="text-slate-400">We'll notify you as soon as a spot opens up.</p>
+                </div>
+              ) : step === 'email' ? (
+                <form onSubmit={handleEmailSubmit} className="space-y-4 animate-in slide-in-from-left duration-300 fade-in">
+                  <p className="text-slate-300 mb-6">
+                    AITake is currently in early access. Enter your email to secure your spot in line.
+                  </p>
+
+                  {errorMsg && (
+                    <div className="p-3 text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-slate-400 mb-1.5">Email address <span className="text-red-400">*</span></label>
+                      <input
+                        type="email"
+                        id="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="you@company.com"
+                        className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-50 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 disabled:from-slate-700 disabled:to-slate-800 disabled:text-slate-400 text-white font-medium py-3 rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(79,70,229,0.5)] disabled:shadow-none flex items-center justify-center gap-2 mt-4"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                        Joining...
+                      </>
+                    ) : (
+                      "Join Waitlist"
+                    )}
+                  </button>
+                </form>
+              ) : (
+                <form onSubmit={handleFeedbackSubmit} className="space-y-4 animate-in slide-in-from-right duration-300 fade-in">
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-500/20 text-indigo-400 mb-4">
+                      <MessageSquare className="w-6 h-6" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-white mb-2">Thanks for joining!</h4>
+                    <p className="text-slate-300 text-sm">
+                      We're building this for you. One quick question before you go:
+                    </p>
+                  </div>
+
+                  {errorMsg && (
+                    <div className="p-3 text-sm text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl">
+                      {errorMsg}
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="feedback" className="block text-sm font-medium text-slate-400 mb-1.5 flex justify-between">
+                        <span>What feature would you love to see?</span>
+                        <span className="text-slate-600 text-xs">Optional</span>
+                      </label>
+                      <textarea
+                        id="feedback"
+                        rows={3}
+                        value={feedback}
+                        onChange={(e) => setFeedback(e.target.value)}
+                        placeholder="e.g. Shopify integration, custom bot personalities..."
+                        className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-50 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all resize-none"
+                        autoFocus
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 mt-4">
+                    <button
+                      type="button"
+                      onClick={skipFeedback}
+                      disabled={isSubmitting}
+                      className="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl transition-all disabled:opacity-50"
+                    >
+                      Skip
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="flex-[2] bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 disabled:from-slate-700 disabled:to-slate-800 disabled:text-slate-400 text-white font-medium py-3 rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(79,70,229,0.5)] disabled:shadow-none flex items-center justify-center gap-2"
+                    >
+                      {isSubmitting ? (
+                        <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                      ) : (
+                        "Submit Feedback"
+                      )}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Decorative Background Effects */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/20 blur-[120px]" />
@@ -25,12 +257,12 @@ export default function Home() {
             <Link href="#demo" className="hover:text-white transition-colors">Demo</Link>
           </div>
           <div className="flex gap-4 items-center">
-            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+            <button onClick={openWaitlist} className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
               Log in
-            </Link>
-            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="hidden md:flex text-sm font-medium bg-white text-slate-950 px-5 py-2.5 rounded-full hover:bg-slate-200 transition-colors">
+            </button>
+            <button onClick={openWaitlist} className="hidden md:flex text-sm font-medium bg-white text-slate-950 px-5 py-2.5 rounded-full hover:bg-slate-200 transition-colors">
               Get Started
-            </Link>
+            </button>
           </div>
         </div>
       </nav>
@@ -50,9 +282,9 @@ export default function Home() {
             <strong className="text-white font-medium mt-2 block">🌍 Free Early Access for the first 50 users (includes 1,000 free AI messages/mo) in exchange for feedback!</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)]">
+            <button onClick={openWaitlist} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)]">
               Claim Free Access <ArrowRight className="w-4 h-4" />
-            </Link>
+            </button>
             <Link href="#how-it-works" className="flex items-center justify-center gap-2 bg-white/5 border border-white/10 hover:bg-white/10 text-white px-8 py-4 rounded-full font-medium transition-colors">
               Learn More
             </Link>
@@ -162,9 +394,9 @@ export default function Home() {
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 relative z-10">Help us shape the future of sales.</h2>
               <p className="text-xl text-slate-300 mb-10 max-w-2xl mx-auto relative z-10">We are offering full, free access to the first 50 early adopters who are willing to share their feedback and help us build the best WhatsApp CRM. (Includes 1,000 free AI interactions per month)</p>
               <div className="flex justify-center relative z-10">
-                <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
+                <button onClick={openWaitlist} className="bg-white text-slate-950 px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform text-lg flex items-center gap-2 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
                   Claim Your Free Access <ArrowRight className="w-5 h-5" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -189,7 +421,7 @@ export default function Home() {
               <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Full CRM Access</li>
               <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Webhook Integration</li>
             </ul>
-            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="block w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 text-center rounded-lg font-medium transition-colors">Start Free</Link>
+            <button onClick={openWaitlist} className="block w-full py-3 px-4 bg-slate-800 hover:bg-slate-700 text-center rounded-lg font-medium transition-colors">Start Free</button>
           </div>
 
           {/* Pro Tier */}
@@ -203,7 +435,7 @@ export default function Home() {
               <li className="flex items-center gap-3 text-white"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Unlimited CRM Users</li>
               <li className="flex items-center gap-3 text-white"><CheckCircle2 className="w-5 h-5 text-indigo-400" /> Priority Support</li>
             </ul>
-            <Link href={process.env.CRM_URL || "http://localhost:59071/"} className="block w-full py-3 px-4 bg-indigo-500 hover:bg-indigo-600 text-white text-center rounded-lg font-medium transition-colors shadow-lg shadow-indigo-500/25">Upgrade to Pro</Link>
+            <button onClick={openWaitlist} className="block w-full py-3 px-4 bg-indigo-500 hover:bg-indigo-600 text-white text-center rounded-lg font-medium transition-colors shadow-lg shadow-indigo-500/25">Upgrade to Pro</button>
           </div>
         </div>
       </div>
