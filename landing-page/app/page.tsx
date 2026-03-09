@@ -389,9 +389,9 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-bold tracking-tighter max-w-4xl mb-8 leading-[1.1]">
             Automate Your Sales on <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">WhatsApp</span>
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-12 leading-relaxed">
-            Close deals while you rest. AIOTake provides a 24/7 AI-powered Orderbot perfectly integrated with a powerful CRM built natively for WhatsApp. <br />
-            <strong className="text-white font-medium mt-2 block">🌍 Free Early Access for the first 50 users (includes 1,000 free AI messages/mo) in exchange for feedback!</strong>
+          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mb-12 leading-relaxed">
+            AIOTake is an automated, AI-driven platform designed to modernize how businesses handle customer orders and inquiries. By integrating an intelligent generative AI chatbot directly into WhatsApp, the platform allows businesses to serve customers 24/7, reduce manual overhead, and increase order throughput, all while maintaining a user-friendly management dashboard. <br />
+            <strong className="text-white font-medium mt-4 block">🌍 Free Early Access for the first 50 users (includes 1,000 free AI messages/mo) in exchange for feedback!</strong>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button onClick={openWaitlist} className="flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white px-8 py-4 rounded-full font-medium hover:scale-105 transition-transform shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)]">
@@ -441,7 +441,7 @@ export default function Home() {
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Why choose AIOTake?</h2>
               <p className="text-slate-400 text-lg max-w-2xl mx-auto">Transform your operations with a platform designed for modern businesses.</p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 gap-12">
               <div className="flex gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -452,7 +452,7 @@ export default function Home() {
                   <p className="text-slate-400 leading-relaxed">Customers can ask questions, browse the menu, and place orders at any time of day through WhatsApp, a platform they already use and trust.</p>
                 </div>
               </div>
-              
+
               <div className="flex gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -462,7 +462,7 @@ export default function Home() {
                   <p className="text-slate-400 leading-relaxed">Automating the routine order-taking process frees up staff to focus on fulfilling orders and delivering high-quality products/services, reducing labor costs.</p>
                 </div>
               </div>
-              
+
               <div className="flex gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
@@ -472,7 +472,7 @@ export default function Home() {
                   <p className="text-slate-400 leading-relaxed">Business owners get a unified, cross-platform dashboard to monitor live AI conversations, review placed orders, and step in manually if needed.</p>
                 </div>
               </div>
-              
+
               <div className="flex gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
