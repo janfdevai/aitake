@@ -434,10 +434,62 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Value Proposition Section */}
+        <section id="benefits" className="py-24 relative bg-slate-900/40 border-y border-white/5">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Why choose AIOTake?</h2>
+              <p className="text-slate-400 text-lg max-w-2xl mx-auto">Transform your operations with a platform designed for modern businesses.</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="flex gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">24/7 Customer Service</h3>
+                  <p className="text-slate-400 leading-relaxed">Customers can ask questions, browse the menu, and place orders at any time of day through WhatsApp, a platform they already use and trust.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Operational Efficiency</h3>
+                  <p className="text-slate-400 leading-relaxed">Automating the routine order-taking process frees up staff to focus on fulfilling orders and delivering high-quality products/services, reducing labor costs.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Centralized Management</h3>
+                  <p className="text-slate-400 leading-relaxed">Business owners get a unified, cross-platform dashboard to monitor live AI conversations, review placed orders, and step in manually if needed.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" /></svg>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-2">Scalable Infrastructure</h3>
+                  <p className="text-slate-400 leading-relaxed">Built on modern, secure cloud technologies ensuring the system can handle traffic spikes and grow seamlessly as your business expands.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Features Section */}
         <section id="features" className="py-24 max-w-7xl mx-auto px-6 relative">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Everything you need to sell smarter</h2>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Core Capabilities</h2>
             <p className="text-slate-400 text-lg max-w-2xl mx-auto">Stop missing messages. Turn your WhatsApp business channel into an automated revenue-generating machine.</p>
           </div>
 
@@ -446,24 +498,24 @@ export default function Home() {
               <div className="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Bot strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-semibold mb-3">AI Orderbot</h3>
-              <p className="text-slate-400 leading-relaxed">Intelligent conversation flows that guide your customers from browsing to checkout, completely autonomously 24/7.</p>
-            </div>
-
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/[0.07] transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <MessageSquare strokeWidth={1.5} />
-              </div>
-              <h3 className="text-xl font-semibold mb-3">Native WhatsApp</h3>
-              <p className="text-slate-400 leading-relaxed">Meet your customers where they already are. Provide frictionless experiences without requiring app downloads or web portals.</p>
+              <h3 className="text-xl font-semibold mb-3">Intelligent WhatsApp Agent</h3>
+              <p className="text-slate-400 leading-relaxed">Connects directly to your WhatsApp Business account. Leverages advanced AI to understand natural language, handle complex mixed orders, answer FAQs, and extract accurate order details autonomously.</p>
             </div>
 
             <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/[0.07] transition-colors group">
               <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <BarChart3 strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Powerful CRM</h3>
-              <p className="text-slate-400 leading-relaxed">Track every order, manage customer profiles, and review AI conversations from a state-of-the-art dashboard.</p>
+              <h3 className="text-xl font-semibold mb-3">Business CRM Dashboard</h3>
+              <p className="text-slate-400 leading-relaxed">An intuitive app for any device. Watch the AI converse in real-time, view extracted structured orders ready for fulfillment, and seamlessly pause the AI to take over conversations manually.</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/[0.07] transition-colors group">
+              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <MessageSquare strokeWidth={1.5} />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Native WhatsApp Experience</h3>
+              <p className="text-slate-400 leading-relaxed">Meet your customers where they already are. Provide frictionless purchasing experiences without requiring app downloads or directing users away to web portals.</p>
             </div>
           </div>
         </section>
